@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <feature-events />
+    <search-events />
+    <create-event-btn />
+    <future-user-events />
+    <past-user-events />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import CreateEventBtn from "../components/CreateEventBtn.vue";
+import FeatureEvents from "../components/FeatureEvents.vue";
+import FutureUserEvents from "../components/FutureUserEvents.vue";
+import PastUserEvents from "../components/PastUserEvents.vue";
+import SearchEvents from "../components/SearchEvents.vue";
 export default {
-  name: 'Home',
+  name: "home",
   components: {
-    HelloWorld
-  }
-}
+    FeatureEvents,
+    SearchEvents,
+    CreateEventBtn,
+    FutureUserEvents,
+    PastUserEvents,
+  },
+};
 </script>
+
+<style scoped></style>

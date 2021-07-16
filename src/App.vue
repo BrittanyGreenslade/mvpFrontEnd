@@ -1,23 +1,50 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <page-header />
+    <router-view />
+    <footer>Copyright 2021 Brittany Greenslade</footer>
   </div>
 </template>
+<script>
+import PageHeader from "./components/PageHeader.vue";
+export default {
+  components: { PageHeader },
+  computed: {
+    loginToken() {
+      return this.$store.state.loginToken;
+    },
+    routePath() {
+      return this.$route.path;
+    },
+  },
+  watch: {
+    //routes to feed when link path is just /
+    routePath(newValue, oldValue) {
+      if (this.loginToken && newValue === "/") {
+        this.$router.push({ path: `/feed` });
+      }
+      oldValue;
+    },
+  },
+  mounted() {
+    // this.$router.push({ path: `/login` });
+    if (this.loginToken && this.$route.path === "/") {
+      this.$router.push({ path: `/home` });
+    }
+  },
+  methods: {
+    notifyLogin() {
+      if (!this.loginToken) {
+        this.$router.push({ path: `/login` });
+      }
+    },
+  },
+};
+</script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
+/* #nav 
+LoginForm{
   padding: 30px;
 }
 
@@ -28,5 +55,5 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>
