@@ -13,12 +13,9 @@
 </template>
 
 <script>
-// import EventProfile from "../components/EventProfile.vue";
 export default {
-  name: "past-current-user-events",
-  components: {
-    // EventProfile,
-  },
+  name: "past-user-events",
+
   computed: {
     currentUserInfo() {
       return this.$store.state.currentUserInfo;

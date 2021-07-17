@@ -1,10 +1,16 @@
 <template>
-  <div></div>
+  <div>
+    <create-event-form />
+  </div>
 </template>
 
 <script>
+import CreateEventForm from "../components/CreateEventForm.vue";
 export default {
   name: "create-event",
+  components: {
+    CreateEventForm,
+  },
 };
 </script>
 

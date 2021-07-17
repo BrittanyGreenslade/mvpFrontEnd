@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button @click="atttendEvent">attend</button>
+    <button v-if="attending === false" @click="atttendEvent">attend</button>
+    <button v-else @click="attending === false">unattend</button>
   </div>
-  <!-- logic for only being able to attend event once -->
 </template>
 
 <script>
@@ -12,10 +12,18 @@ export default {
   props: {
     eventId: Number,
   },
+  data() {
+    return {
+      attending: false,
+    };
+  },
 
   computed: {
     loginToken() {
       return this.$store.state.loginToken;
+    },
+    usersEvents() {
+      return this.$store.state.usersEvents;
     },
   },
   methods: {
@@ -31,11 +39,14 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          this.$store.commit("addUserEvent", res.data);
+          for (let i = 0; i < this.usersEvents.length; i++) {
+            if (this.usersEvents.eventId === this.eventId) {
+              this.attending == true;
+            }
+          }
         })
         .catch((err) => {
-          console.log(this.loginToken);
-          console.log(typeof this.eventId);
           console.log(err);
         });
     },

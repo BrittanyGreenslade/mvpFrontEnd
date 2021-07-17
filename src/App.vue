@@ -27,14 +27,15 @@ export default {
     },
   },
   mounted() {
-    // this.$router.push({ path: `/login` });
-    if (this.loginToken && this.$route.path === "/") {
-      this.$router.push({ path: `/home` });
-    }
+    this.$router.push({ path: `/login` });
+    // if (this.loginToken && this.$route.path === "/") {
+    //   this.$router.push({ path: `/home` });
+    // }
+    // this.notifyLogin();
   },
   methods: {
     notifyLogin() {
-      if (!this.loginToken) {
+      if (this.loginToken === null) {
         this.$router.push({ path: `/login` });
       }
     },

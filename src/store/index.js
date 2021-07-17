@@ -10,7 +10,7 @@ export default new Vuex.Store({
     currentUserInfo: cookies.get("currentUserInfo"),
     loginToken: cookies.get("loginToken"),
     allUsers: undefined,
-    // allEvents: undefined,
+    allEvents: undefined,
     usersEvents: undefined,
     eventsAttendees: undefined,
   },
@@ -24,8 +24,53 @@ export default new Vuex.Store({
     updateUsersEvents(state, data) {
       state.usersEvents = data;
     },
+    updateUsers(state, data) {
+      state.allUsers = data;
+    },
+    updateAllEvents(state, data) {
+      state.allEvents = data;
+    },
+    addUserEvent(state, data) {
+      if (state.allEvents == undefined) {
+        let events = [];
+        events.push(data);
+        state.allEvents = events;
+      } else {
+        state.allEvents.push(data);
+      }
+    },
+    deleteUser(state) {
+      for (let i = 0; i < state.allUsers.length; i++) {
+        if (state.allUsers[i].userId === this.currentUserInfo.userId) {
+          state.allUsers.splice(i, 1);
+        }
+      }
+    },
+    createEvent(state, data) {
+      if (state.usersEvents == undefined) {
+        let events = [];
+        events.push(data);
+        state.usersEvents = events;
+      } else {
+        state.usersEvents.push(data);
+      }
+    },
   },
   actions: {
+    getUsers(context) {
+      axios
+        .request({
+          url: `${process.env.VUE_APP_API_URL}/users`,
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          context.commit("updateUsersEvents", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getUsersEvents(context, userId) {
       axios
         .request({
@@ -44,13 +89,9 @@ export default new Vuex.Store({
         });
     },
   },
-  modules: {},
   getters: {
     usersFutureEvents(state) {
       let futureEvents = [];
-      //why does this work? why wouldn't this just make usersFutureEvents an empty array?
-      //I don't get how state.usersEvents suddenly becomes defined and two of line 53 print
-      console.log(state.usersEvents);
       if (state.usersEvents === undefined) {
         return futureEvents;
       }
@@ -63,8 +104,6 @@ export default new Vuex.Store({
     },
     usersPastEvents(state) {
       let pastEvents = [];
-      //why does this work? why wouldn't this just make usersFutureEvents an empty array?
-      //I don't get how state.usersEvents suddenly becomes defined and two of line 53 print
       if (state.usersEvents === undefined) {
         return pastEvents;
       }

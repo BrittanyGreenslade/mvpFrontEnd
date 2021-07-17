@@ -13,9 +13,7 @@ export default {
       return this.$store.state.loginToken;
     },
   },
-  mounted() {
-    console.log(this.loginToken);
-  },
+  mounted() {},
 };
 </script>
 

@@ -43,7 +43,6 @@ export default {
           this.navigateToLogin();
         })
         .catch((err) => {
-          console.log(this.loginToken);
           console.log(err);
         });
     },

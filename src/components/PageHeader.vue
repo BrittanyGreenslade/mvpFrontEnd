@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loginToken !== null">
+  <div v-if="loginToken">
     <h1>COOL APP NAME</h1>
     <router-link to="/home">Home</router-link> |
     <router-link :to="`/profile/${currentUserInfo.userId}`"

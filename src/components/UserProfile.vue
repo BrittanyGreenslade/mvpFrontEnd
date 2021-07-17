@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Your Profile</h1>
-    <h2>{{ currentUserInfo.username }}</h2>
+    <h1>{{ currentUserInfo.name }}'s Profile</h1>
     <h5>Birthdate: {{ currentUserInfo.birthdate }}</h5>
     <h5>{{ currentUserInfo.email }}</h5>
     <p>{{ currentUserInfo.bio }}</p>
@@ -13,22 +12,24 @@
       :src="`${currentUserInfo.imageUrl}`"
       alt="current user profile picture"
     />
+    <past-user-events />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import PastUserEvents from "../components/PastUserEvents.vue";
 export default {
   name: "user-profile",
+  components: {
+    PastUserEvents,
+  },
   computed: {
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
     },
   },
-  mounted() {
-    // if(this.proppedUserId !== this.currentUserInfo.userId){}
-    // this.viewUserProfile();
-  },
+  mounted() {},
   methods: {
     viewUserProfile() {
       axios

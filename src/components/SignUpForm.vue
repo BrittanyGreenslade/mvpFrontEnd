@@ -6,6 +6,7 @@
       <input type="text" id="email" placeholder="email" required />
       <input type="password" id="password" placeholder="password" required />
       <input type="text" id="cityName" placeholder="city name" required />
+      <!-- maybe user bio -->
       <input type="text" id="countryName" placeholder="country name" required />
       <input
         @click="userSignup"
@@ -14,6 +15,9 @@
         placeholder="register"
       />
     </form>
+    <h3>
+      Already have an account? <router-link to="/login">Login</router-link>
+    </h3>
   </div>
 </template>
 
@@ -28,9 +32,9 @@ export default {
     },
   },
   methods: {
-    navigateToProfile() {
+    navigateToHome() {
       this.$router.push({
-        path: `/profile/${this.currentUserInfo.userId}`,
+        path: `/home`,
       });
     },
     userSignup() {
@@ -48,12 +52,11 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
           cookies.set("currentUserInfo", res.data);
           cookies.set("loginToken", res.data.loginToken);
           this.$store.commit("updateCurrentUserInfo", res.data);
           this.$store.commit("updateLoginToken", res.data.loginToken);
-          this.navigateToProfile();
+          this.navigateToHome();
         })
         .catch((err) => {
           console.log(err);
