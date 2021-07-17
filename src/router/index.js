@@ -31,7 +31,7 @@ const routes = [
     component: Signup,
   },
   {
-    path: "/event",
+    path: "/event/:eventId",
     name: "Event",
     component: Event,
   },

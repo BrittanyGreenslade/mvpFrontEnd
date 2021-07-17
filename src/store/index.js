@@ -61,5 +61,20 @@ export default new Vuex.Store({
       }
       return futureEvents;
     },
+    usersPastEvents(state) {
+      let pastEvents = [];
+      //why does this work? why wouldn't this just make usersFutureEvents an empty array?
+      //I don't get how state.usersEvents suddenly becomes defined and two of line 53 print
+      if (state.usersEvents === undefined) {
+        return pastEvents;
+      }
+      //put <= because if they're already attending, I think of it as a past event
+      for (let i = 0; i < state.usersEvents.length; i++) {
+        if (Date.parse(state.usersEvents[i].dateTime) <= Date.now()) {
+          pastEvents.push(state.usersEvents[i]);
+        }
+      }
+      return pastEvents;
+    },
   },
 });

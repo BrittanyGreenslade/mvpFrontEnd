@@ -6,7 +6,7 @@
       >Profile</router-link
     >
     |
-    <router-link to="/events">Events</router-link>
+    <router-link to="/event">Event</router-link>
     <logout-btn />
   </div>
 </template>

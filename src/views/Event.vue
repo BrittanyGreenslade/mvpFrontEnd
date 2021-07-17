@@ -1,26 +1,28 @@
 <template>
   <div>
-    <page-header />
-    <one-event />
+    <event-profile />
     <edit-event />
     <delete-event />
-    <attend-event />
   </div>
 </template>
 <script>
-import AttendEvent from "../components/AttendEvent.vue";
 import DeleteEvent from "../components/DeleteEvent.vue";
 import EditEvent from "../components/EditEvent.vue";
-import PageHeader from "../components/PageHeader.vue";
-import OneEvent from "../components/OneEvent.vue";
+import EventProfile from "../components/EventProfile.vue";
 export default {
   name: "event",
   components: {
-    OneEvent,
+    EventProfile,
     EditEvent,
     DeleteEvent,
-    AttendEvent,
-    PageHeader,
+  },
+  computed: {
+    // routePath() {
+    //   return this.$route.path;
+    // },
+  },
+  mounted() {
+    // console.log(this.routePath);
   },
 };
 </script>

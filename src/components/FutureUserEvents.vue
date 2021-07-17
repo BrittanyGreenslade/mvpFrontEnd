@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Future Events</h2>
     <div v-for="event in usersFutureEvents" :key="event.eventId">
       <p>{{ event.dateTime }}</p>
       <h3>{{ event.eventName }}</h3>
@@ -25,8 +26,7 @@ export default {
     },
   },
   mounted() {
-    //how do you send data with an action dispatch?
-    //problem with getters here when dispatching action on refresh
+    //change id to the prop here when there is one
     if (this.usersEvents === undefined) {
       this.$store.dispatch("getUsersEvents", this.currentUserInfo.userId);
     }
