@@ -1,20 +1,16 @@
 <template>
   <div>
     <h1>Edit profile</h1>
-    <form action="javascript:void(0)" id="signupForm">
+    <form action="javascript:void(0)" id="editProfileForm">
       <input type="text" id="name" placeholder="name" />
       <input type="text" id="email" placeholder="email" />
       <input type="password" id="password" placeholder="password" />
       <input type="text" id="cityName" placeholder="city name" />
       <input type="text" id="countryName" placeholder="country name" />
       <input type="text" id="bio" placeholder="bio max length 300 characters" />
-      <!-- maybe user bio -->
-      <input
-        @click="editProfile"
-        type="submit"
-        id="editBtn"
-        placeholder="edit"
-      />
+      <input type="text" id="imgUrl" placeholder="link to profile img" />
+      <input type="text" id="linkedInUrl" placeholder="LinkedIn url" />
+      <button @click="editProfile" id="editBtn">edit</button>
     </form>
     <delete-profile />
   </div>
@@ -46,6 +42,9 @@ export default {
             cityName: document.getElementById("cityName").value,
             countryName: document.getElementById("countryName").value,
             loginToken: this.loginToken,
+            imageUrl: document.getElementById("imgUrl").value,
+            linkedInUrl: document.getElementById("linkedInUrl").value,
+            bio: document.getElementById("bio").value,
           },
         })
         .then((res) => {

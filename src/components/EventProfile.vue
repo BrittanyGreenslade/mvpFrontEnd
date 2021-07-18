@@ -46,7 +46,6 @@ export default {
     } else {
       this.oneEvent();
     }
-    console.log(this.userEvents);
   },
   methods: {
     //if userEvents isn't empty, this will filter through to find the event id of

@@ -8,44 +8,39 @@
       <p>{{ event.countryName }}</p>
       <img :src="`${event.eventImageUrl}`" alt="event image" />
       <attend-event :eventId="event.eventId" />
+      <delete-event :eventId="event.eventId" :hostId="event.hostId" />
+      <router-link
+        :to="`/event/${event.eventId}`"
+        v-if="currentUserInfo.userId === event.hostId"
+        >View Event</router-link
+      >
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import AttendEvent from "./AttendEvent.vue";
+import DeleteEvent from "./DeleteEvent.vue";
 export default {
-  components: { AttendEvent },
+  components: { AttendEvent, DeleteEvent },
   name: "all-events",
   computed: {
     allEvents() {
       return this.$store.state.allEvents;
+    },
+    currentUserInfo() {
+      return this.$store.state.currentUserInfo;
     },
   },
   mounted() {
     //do a check to see if userEvents isn't undefined?
     //change id to the prop here when there is one
     if (this.allEvents === undefined) {
-      this.getAllEvents();
+      this.$store.dispatch("getAllEvents");
     }
   },
-  methods: {
-    getAllEvents() {
-      axios
-        .request({
-          url: `${process.env.VUE_APP_API_URL}/events`,
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((res) => {
-          this.$store.commit("updateAllEvents", res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
+  watch: {},
+  methods: {},
 };
 </script>
 

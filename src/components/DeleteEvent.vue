@@ -1,16 +1,47 @@
 <template>
-  <div></div>
+  <div>
+    <button
+      v-if="this.currentUserInfo.userId === this.hostId"
+      @click="deleteEvent"
+    >
+      delete event
+    </button>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-import cookies from "vue-cookies";
 export default {
   name: "delete-event",
   props: {
     eventId: Number,
+    hostId: Number,
+  },
+  computed: {
+    currentUserInfo() {
+      return this.$store.state.currentUserInfo;
+    },
+    allEvents() {
+      return this.$store.state.allEvents;
+    },
+    loginToken() {
+      return this.$store.state.loginToken;
+    },
+  },
+  mounted() {
+    //do a check to see if allUsers isn't undefined?
+    if (this.$store.state.allEvents === undefined) {
+      this.$store.dispatch("getAllEvents");
+    }
   },
   methods: {
+    spliceUser(allEvents) {
+      for (let i = 0; i < allEvents.length; i++) {
+        if (allEvents[i].eventId === this.eventId) {
+          allEvents.splice(i, 1);
+        }
+      }
+    },
     deleteEvent() {
       axios
         .request({
@@ -23,21 +54,15 @@ export default {
           },
         })
         .then((res) => {
-          this.navigateToSignup();
-          for (let i = 0; i < this.allUsers.length; i++) {
-            if (this.allUsers[i].userId === this.currentUserInfo.userId) {
-              this.$store.commit("deleteUser", i);
+          // this.navigateToSignup();
+          for (let i = 0; i < this.allEvents.length; i++) {
+            if (this.allEvents[i].userId === this.eventId) {
+              this.$store.commit("deleteEvent", i);
             }
           }
-          cookies.remove("loginToken");
-          this.$store.commit("updateLoginToken", undefined);
-          cookies.remove("currentUserInfo");
-          this.$store.commit("updateCurrentUserInfo", undefined);
-          this.loginStatus = "Profile deleted! Redirecting...";
-          console.log(res.data);
+          res;
         })
         .catch((err) => {
-          console.log(this.loginToken);
           console.log(err);
         });
     },

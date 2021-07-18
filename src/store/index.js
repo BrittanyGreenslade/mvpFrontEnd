@@ -41,11 +41,10 @@ export default new Vuex.Store({
     },
 
     deleteUser(state, data) {
-      // for (let i = 0; i < state.allUsers.length; i++) {
-      //   if (state.allUsers[i].userId === state.currentUserInfo.userId) {
       state.allUsers.splice(data, 1);
-      //   }
-      // }
+    },
+    deleteEvent(state, data) {
+      state.allEvents.splice(data, 1);
     },
     createEvent(state, data) {
       if (state.usersEvents == undefined) {
@@ -67,6 +66,20 @@ export default new Vuex.Store({
         })
         .then((res) => {
           context.commit("updateUsers", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getAllEvents(context) {
+      axios
+        .request({
+          url: `${process.env.VUE_APP_API_URL}/events`,
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          context.commit("updateAllEvents", res.data);
         })
         .catch((err) => {
           console.log(err);

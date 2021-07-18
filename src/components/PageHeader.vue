@@ -5,8 +5,6 @@
     <router-link :to="`/profile/${currentUserInfo.userId}`"
       >Profile</router-link
     >
-    |
-    <router-link to="/event">Event</router-link>
     <logout-btn />
   </div>
 </template>
