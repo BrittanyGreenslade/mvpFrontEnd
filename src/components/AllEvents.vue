@@ -1,18 +1,22 @@
 <template>
   <div>
     <div v-for="event in allEvents" :key="event.eventId">
+      <p>{{ event.eventId }}</p>
       <p>{{ event.dateTime }}</p>
       <h3>{{ event.eventName }}</h3>
       <p>{{ event.cityName }}</p>
       <p>{{ event.countryName }}</p>
       <img :src="`${event.eventImageUrl}`" alt="event image" />
+      <attend-event :eventId="event.eventId" />
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import AttendEvent from "./AttendEvent.vue";
 export default {
+  components: { AttendEvent },
   name: "all-events",
   computed: {
     allEvents() {

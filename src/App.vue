@@ -27,11 +27,11 @@ export default {
     },
   },
   mounted() {
-    this.$router.push({ path: `/login` });
-    // if (this.loginToken && this.$route.path === "/") {
-    //   this.$router.push({ path: `/home` });
-    // }
-    // this.notifyLogin();
+    // this.$router.push({ path: `/login` });
+    if (this.loginToken && this.$route.path === "/") {
+      this.$router.push({ path: `/home` });
+    }
+    this.notifyLogin();
   },
   methods: {
     notifyLogin() {

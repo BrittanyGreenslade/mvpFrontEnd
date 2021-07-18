@@ -31,20 +31,21 @@ export default new Vuex.Store({
       state.allEvents = data;
     },
     addUserEvent(state, data) {
-      if (state.allEvents == undefined) {
+      if (state.usersEvents == undefined) {
         let events = [];
         events.push(data);
-        state.allEvents = events;
+        state.usersEvents = events;
       } else {
-        state.allEvents.push(data);
+        state.usersEvents.push(data);
       }
     },
-    deleteUser(state) {
-      for (let i = 0; i < state.allUsers.length; i++) {
-        if (state.allUsers[i].userId === this.currentUserInfo.userId) {
-          state.allUsers.splice(i, 1);
-        }
-      }
+
+    deleteUser(state, data) {
+      // for (let i = 0; i < state.allUsers.length; i++) {
+      //   if (state.allUsers[i].userId === state.currentUserInfo.userId) {
+      state.allUsers.splice(data, 1);
+      //   }
+      // }
     },
     createEvent(state, data) {
       if (state.usersEvents == undefined) {
@@ -65,7 +66,7 @@ export default new Vuex.Store({
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
-          context.commit("updateUsersEvents", res.data);
+          context.commit("updateUsers", res.data);
         })
         .catch((err) => {
           console.log(err);

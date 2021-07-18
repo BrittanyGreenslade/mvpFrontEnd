@@ -25,6 +25,14 @@ export default {
     usersEvents() {
       return this.$store.state.usersEvents;
     },
+    currentUserInfo() {
+      return this.$store.state.currentUserInfo;
+    },
+  },
+  mounted() {
+    if (this.usersEvents === undefined) {
+      this.$store.dispatch("getUsersEvents", this.currentUserInfo.userId);
+    }
   },
   methods: {
     atttendEvent() {
@@ -49,6 +57,28 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+      //       unattendEvent() {
+      // axios
+      //   .request({
+      //     url: `${process.env.VUE_APP_API_URL}/users-events`,
+      //     method: "DELETE",
+      //     headers: { "Content-Type": "application/json" },
+      //     data: {
+      //       loginToken: this.loginToken,
+      //       eventId: this.eventId,
+      //     },
+      //   })
+      //   .then((res) => {
+      //     this.$store.commit("addUserEvent", res.data);
+      //     for (let i = 0; i < this.usersEvents.length; i++) {
+      //       if (this.usersEvents.eventId === this.eventId) {
+      //         this.attending == true;
+      //       }
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     },
   },
 };
