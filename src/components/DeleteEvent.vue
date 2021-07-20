@@ -35,13 +35,13 @@ export default {
     }
   },
   methods: {
-    spliceUser(allEvents) {
-      for (let i = 0; i < allEvents.length; i++) {
-        if (allEvents[i].eventId === this.eventId) {
-          allEvents.splice(i, 1);
-        }
-      }
-    },
+    // spliceEvent(allEvents) {
+    //   for (let i = 0; i < allEvents.length; i++) {
+    //     if (allEvents[i].eventId === this.eventId) {
+    //       allEvents.splice(i, 1);
+    //     }
+    //   }
+    // },
     deleteEvent() {
       axios
         .request({

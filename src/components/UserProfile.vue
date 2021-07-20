@@ -12,24 +12,31 @@
       :src="`${currentUserInfo.imageUrl}`"
       alt="current user profile picture"
     />
-    <past-user-events />
+    <!-- <past-user-events /> -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import PastUserEvents from "../components/PastUserEvents.vue";
+// import PastUserEvents from "../components/PastUserEvents.vue";
 export default {
   name: "user-profile",
   components: {
-    PastUserEvents,
+    // PastUserEvents,
   },
   computed: {
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
     },
+    usersEvents() {
+      return this.$store.state.usersEvents;
+    },
   },
-  mounted() {},
+  // mounted() {
+  //   if (this.usersEvents === undefined) {
+  //     this.$store.dispatch("getUsersEvents", this.userId);
+  //   }
+  // },
   methods: {
     viewUserProfile() {
       axios

@@ -34,13 +34,13 @@ export default {
     navigateToSignup() {
       this.$router.push({ name: "Signup" });
     },
-    spliceUser(allUsers) {
-      for (let i = 0; i < allUsers.length; i++) {
-        if (allUsers[i].userId === this.currentUserInfo.userId) {
-          allUsers.splice(i, 1);
-        }
-      }
-    },
+    // spliceUser(allUsers) {
+    //   for (let i = 0; i < allUsers.length; i++) {
+    //     if (allUsers[i].userId === this.currentUserInfo.userId) {
+    //       allUsers.splice(i, 1);
+    //     }
+    //   }
+    // },
     deleteUser() {
       axios
         .request({

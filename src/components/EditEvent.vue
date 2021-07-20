@@ -36,20 +36,20 @@ export default {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           data: {
-            name: document.getElementById("eventName").value,
+            eventName: document.getElementById("eventName").value,
             description: document.getElementById("description").value,
             dateTime: document.getElementById("dateTime").value,
             eventImageUrl: document.getElementById("eventImageUrl").value,
             cityName: document.getElementById("cityName").value,
             countryName: document.getElementById("countryName").value,
-            eventId: this.eventId,
+            eventId: Number(this.eventId),
             loginToken: this.loginToken,
           },
         })
         .then((res) => {
           console.log(res.data);
           for (let i = 0; i < this.allEvents.length; i++) {
-            if (this.allEvents[i].eventId === this.eventId) {
+            if (this.allEvents[i].eventId === Number(this.eventId)) {
               this.allEvents[i] = res.data;
             }
           }

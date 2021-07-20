@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button v-if="attending === false" @click="atttendEvent">attend</button>
-    <button v-else @click="attending === false">unattend</button>
+    <button v-if="attending === false" @click="attendEvent">attend</button>
+    <button v-else @click="unattendEvent">unattend</button>
   </div>
 </template>
 
@@ -32,10 +32,29 @@ export default {
   mounted() {
     if (this.usersEvents === undefined) {
       this.$store.dispatch("getUsersEvents", this.currentUserInfo.userId);
+    } else {
+      this.checkEventAttending();
     }
   },
+  watch: {
+    usersEvents(newValue, oldValue) {
+      for (let i = 0; i < newValue.length; i++) {
+        if (newValue[i].eventId === this.eventId) {
+          this.attending = true;
+        }
+      }
+      oldValue;
+    },
+  },
   methods: {
-    atttendEvent() {
+    checkEventAttending() {
+      for (let i = 0; i < this.usersEvents.length; i++) {
+        if (this.usersEvents[i].eventId === this.eventId) {
+          this.attending = true;
+        }
+      }
+    },
+    attendEvent() {
       axios
         .request({
           url: `${process.env.VUE_APP_API_URL}/users-events`,
@@ -47,38 +66,44 @@ export default {
           },
         })
         .then((res) => {
+          console.log(res.data);
           this.$store.commit("addUserEvent", res.data);
-          for (let i = 0; i < this.usersEvents.length; i++) {
-            if (this.usersEvents.eventId === this.eventId) {
-              this.attending == true;
-            }
-          }
+          // for (let i = 0; i < this.usersEvents.length; i++) {
+          //   if (this.usersEvents[i].eventId === this.eventId) {
+          this.attending = true;
+          console.log(this.usersEvents);
+          //     break;
+          //   }
+          // }
         })
         .catch((err) => {
           console.log(err);
         });
-      //       unattendEvent() {
-      // axios
-      //   .request({
-      //     url: `${process.env.VUE_APP_API_URL}/users-events`,
-      //     method: "DELETE",
-      //     headers: { "Content-Type": "application/json" },
-      //     data: {
-      //       loginToken: this.loginToken,
-      //       eventId: this.eventId,
-      //     },
-      //   })
-      //   .then((res) => {
-      //     this.$store.commit("addUserEvent", res.data);
-      //     for (let i = 0; i < this.usersEvents.length; i++) {
-      //       if (this.usersEvents.eventId === this.eventId) {
-      //         this.attending == true;
-      //       }
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+    },
+    unattendEvent() {
+      axios
+        .request({
+          url: `${process.env.VUE_APP_API_URL}/users-events`,
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          data: {
+            loginToken: this.loginToken,
+            eventId: this.eventId,
+          },
+        })
+        .then((res) => {
+          this.attending = false;
+          for (let i = 0; i < this.usersEvents.length; i++) {
+            if (this.usersEvents[i].eventId === this.eventId) {
+              this.$store.commit("deleteUserEvent", i);
+              break;
+            }
+          }
+          res;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

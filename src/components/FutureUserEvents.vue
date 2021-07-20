@@ -8,14 +8,16 @@
       <p>{{ event.countryName }}</p>
       <img :src="`${event.eventImageUrl}`" alt="event image" />
       <delete-event :eventId="event.eventId" :hostId="event.hostId" />
+      <attend-event :eventId="event.eventId" />
     </div>
   </div>
 </template>
 
 <script>
 import DeleteEvent from "./DeleteEvent.vue";
+import AttendEvent from "./AttendEvent.vue";
 export default {
-  components: { DeleteEvent },
+  components: { DeleteEvent, AttendEvent },
   name: "future-user-events",
   computed: {
     currentUserInfo() {

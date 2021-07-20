@@ -9,19 +9,25 @@
       <p>{{ event.countryName }}</p>
       <img :src="`${event.eventImageUrl}`" alt="event image" />
       <delete-event :eventId="event.eventId" :hostId="event.hostId" />
+      <attend-event :eventId="event.eventId" />
     </div>
   </div>
 </template>
 
 <script>
 import DeleteEvent from "./DeleteEvent.vue";
+import AttendEvent from "./AttendEvent.vue";
 export default {
   name: "past-user-events",
   components: {
     DeleteEvent,
+    AttendEvent,
   },
 
   computed: {
+    userId() {
+      return this.$route.params.userId;
+    },
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
     },
@@ -33,12 +39,27 @@ export default {
     },
   },
   mounted() {
-    //do a check to see if userEvents isn't undefined?
-    //change id to the prop here when there is one
+    //do a check to see if usersEvents isn't undefined
+    //change id to the prop here when there is one?
     if (this.usersEvents === undefined) {
-      this.$store.dispatch("getUsersEvents", this.currentUserInfo.userId);
+      this.$store.dispatch("getUsersEvents", this.userId);
     }
   },
+  watch: {
+    usersEvents(newValue, oldValue) {
+      console.log(newValue);
+      oldValue;
+    },
+  },
+  // methods: {
+  //       checkUserEvents() {
+  //     for (let i = 0; i < this.usersEvents.length; i++) {
+  //       if (this.usersEvents[i].eventId === this.eventId) {
+  //         this.attending = true;
+  //       }
+  //     }
+  //   },
+  // },
 };
 </script>
 

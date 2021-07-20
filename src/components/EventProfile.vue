@@ -10,7 +10,7 @@
     <h3>{{ event.countryName }}</h3>
     <h3>(Number attending)</h3>
     <h3>{{ event.description }}</h3>
-    <attend-event :eventId="event.eventId" />
+    <attend-event :eventId="Number(eventId)" />
     <hr />
   </div>
 </template>
@@ -34,14 +34,14 @@ export default {
       return this.$route.params.eventId;
     },
 
-    userEvents() {
-      return this.$store.state.userEvents;
+    usersEvents() {
+      return this.$store.state.usersEvents;
     },
   },
   mounted() {
     //why is userEvents always undefined even when it's navigating from a page where
     //the call to get userEvents happens
-    if (this.userEvents === undefined) {
+    if (this.usersEvents === undefined) {
       this.getOneEvent(Number(this.eventId));
     } else {
       this.oneEvent();
@@ -51,11 +51,14 @@ export default {
     //if userEvents isn't empty, this will filter through to find the event id of
     //this path and make that the event stored in this page's data
     oneEvent() {
-      for (let i = 0; i < this.userEvents.length; i++) {
-        if (this.userEvents[i].eventId === Number(this.eventId)) {
-          this.userEvents[i] = this.event;
+      for (let i = 0; i < this.usersEvents.length; i++) {
+        if (this.usersEvents[i].eventId === Number(this.eventId)) {
+          this.event = this.usersEvents[i];
+          return;
+          //anything after this won't happen if event is found
         }
       }
+      this.getOneEvent(this.eventId);
     },
     getOneEvent(eventId) {
       axios
@@ -69,9 +72,7 @@ export default {
         })
         .then((res) => {
           for (let i = 0; i < res.data.length; i++) {
-            if (res.data[i].eventId === Number(this.eventId)) {
-              this.event = res.data[i];
-            }
+            this.event = res.data[i];
           }
         })
         .catch((err) => {

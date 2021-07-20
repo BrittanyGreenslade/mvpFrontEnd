@@ -12,7 +12,9 @@ export default new Vuex.Store({
     allUsers: undefined,
     allEvents: undefined,
     usersEvents: undefined,
+    eventsAtLocation: undefined,
     eventsAttendees: undefined,
+    searchCity: undefined,
   },
   mutations: {
     updateCurrentUserInfo(state, data) {
@@ -30,8 +32,11 @@ export default new Vuex.Store({
     updateAllEvents(state, data) {
       state.allEvents = data;
     },
+    updateSearchCity(state, data) {
+      state.searchCity = data;
+    },
     addUserEvent(state, data) {
-      if (state.usersEvents == undefined) {
+      if (state.usersEvents === undefined) {
         let events = [];
         events.push(data);
         state.usersEvents = events;
@@ -45,6 +50,16 @@ export default new Vuex.Store({
     },
     deleteEvent(state, data) {
       state.allEvents.splice(data, 1);
+    },
+    deleteUserEvent(state, data) {
+      state.usersEvents.splice(data, 1);
+    },
+    updateEventsAtLocation(state, data) {
+      // let events = [];
+      // for (let i = 0; i < data.length; i++) {
+      //   events.push(data[i]);
+      // }
+      state.eventsAtLocation = data;
     },
     createEvent(state, data) {
       if (state.usersEvents == undefined) {
@@ -80,6 +95,29 @@ export default new Vuex.Store({
         })
         .then((res) => {
           context.commit("updateAllEvents", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getEventsLocation(context, city_id) {
+      axios
+        .request({
+          url: `${process.env.VUE_APP_API_URL}/events/location`,
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          params: {
+            locationId: city_id,
+          },
+        })
+        .then((res) => {
+          let events = [];
+          if (res.data.length > 0) {
+            for (let i = 0; i < res.data.length; i++) {
+              events.push(res.data[i]);
+            }
+            context.commit("updateEventsAtLocation", events);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -126,8 +164,8 @@ export default new Vuex.Store({
         if (Date.parse(state.usersEvents[i].dateTime) <= Date.now()) {
           pastEvents.push(state.usersEvents[i]);
         }
+        return pastEvents;
       }
-      return pastEvents;
     },
   },
 });

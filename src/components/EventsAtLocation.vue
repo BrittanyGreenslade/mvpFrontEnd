@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="event in allEvents" :key="event.eventId">
+    <div v-for="event in eventsAtLocation" :key="event.eventId">
       <p>{{ event.eventId }}</p>
       <p>{{ event.dateTime }}</p>
       <h3>{{ event.eventName }}</h3>
@@ -16,28 +16,22 @@
 </template>
 
 <script>
-import AttendEvent from "./AttendEvent.vue";
 import DeleteEvent from "./DeleteEvent.vue";
+import AttendEvent from "./AttendEvent.vue";
 export default {
-  components: { AttendEvent, DeleteEvent },
-  name: "all-events",
+  name: "events-at-location",
+  components: {
+    DeleteEvent,
+    AttendEvent,
+  },
   computed: {
-    allEvents() {
-      return this.$store.state.allEvents;
-    },
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
     },
+    eventsAtLocation() {
+      return this.$store.state.eventsAtLocation;
+    },
   },
-  mounted() {
-    //do a check to see if allEvents isn't undefined?
-    //change id to the prop here when there is one
-    if (this.allEvents === undefined) {
-      this.$store.dispatch("getAllEvents");
-    }
-  },
-  watch: {},
-  methods: {},
 };
 </script>
 
