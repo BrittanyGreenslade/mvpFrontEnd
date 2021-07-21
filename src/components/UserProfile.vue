@@ -12,16 +12,19 @@
       :src="`${currentUserInfo.imageUrl}`"
       alt="current user profile picture"
     />
+    <logout-btn />
     <!-- <past-user-events /> -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import LogoutBtn from "./LogoutBtn.vue";
 // import PastUserEvents from "../components/PastUserEvents.vue";
 export default {
   name: "user-profile",
   components: {
+    LogoutBtn,
     // PastUserEvents,
   },
   computed: {

@@ -1,17 +1,34 @@
 <template>
-  <div>
-    <h1>Welcome Back</h1>
-    <form action="javascript:void(0)" id="loginForm">
-      <input type="text" id="email" placeholder="email" required />
-      <input type="password" id="password" placeholder="password" required />
+  <div class="componentCtr">
+    <h2>Cool App Name</h2>
+    <div class="titleContainer">
+      <h1 class="landingTitle">
+        Welcome
+      </h1>
+      <h1 class="landingTitle">
+        Back
+      </h1>
+    </div>
+    <form autocomplete="off" action="javascript:void(0)" class="userForm">
       <input
-        @click="login"
-        type="submit"
-        id="registerBtn"
-        placeholder="login"
+        class="landingInput"
+        type="text"
+        id="email"
+        placeholder="email"
+        required
       />
+      <input
+        class="landingInput"
+        type="password"
+        id="password"
+        placeholder="password (min length 8)"
+        required
+      />
+      <button @click="login" class="btn">login</button>
     </form>
-    <h3>New here? <router-link to="/signup">Register</router-link></h3>
+    <h3 class="landingNav">
+      New here? <router-link to="/signup">Register</router-link>
+    </h3>
   </div>
 </template>
 
@@ -53,4 +70,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.componentCtr {
+  height: 100%;
+  grid-template-rows: 1.5fr 0.5fr 1.75fr 0.5fr;
+}
+.userForm {
+  grid-template-rows: 1fr 1fr 0.5fr;
+}
+</style>

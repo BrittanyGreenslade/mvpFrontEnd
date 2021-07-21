@@ -45,12 +45,7 @@ export default {
       this.$store.dispatch("getUsersEvents", this.userId);
     }
   },
-  watch: {
-    usersEvents(newValue, oldValue) {
-      console.log(newValue);
-      oldValue;
-    },
-  },
+
   // methods: {
   //       checkUserEvents() {
   //     for (let i = 0; i < this.usersEvents.length; i++) {

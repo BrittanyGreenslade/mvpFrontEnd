@@ -66,15 +66,8 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
           this.$store.commit("addUserEvent", res.data);
-          // for (let i = 0; i < this.usersEvents.length; i++) {
-          //   if (this.usersEvents[i].eventId === this.eventId) {
           this.attending = true;
-          console.log(this.usersEvents);
-          //     break;
-          //   }
-          // }
         })
         .catch((err) => {
           console.log(err);

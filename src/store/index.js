@@ -72,6 +72,30 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    //put this here in case path is changed
+    logout(context, loginToken) {
+      axios
+        .request({
+          url: `${process.env.VUE_APP_API_URL}/login`,
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            loginToken: loginToken,
+          },
+        })
+        .then((res) => {
+          res;
+          cookies.remove("loginToken");
+          context.commit("updateLoginToken", undefined);
+          cookies.remove("currentUserInfo");
+          context.commit("updateCurrentUserInfo", undefined);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getUsers(context) {
       axios
         .request({
