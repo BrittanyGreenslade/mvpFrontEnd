@@ -177,6 +177,9 @@ export default {
 .componentCtr {
   grid-template-rows: 0.5fr 0.1fr 0.6fr 0.1fr;
 }
+textarea {
+  height: 20px;
+}
 h2 {
   place-self: center;
 }

@@ -74,7 +74,7 @@ export default {
   min-height: 80vh;
 }
 #footer {
-  height: 15vh;
+  height: 10vh;
   display: grid;
   place-items: center;
 }
@@ -104,8 +104,14 @@ export default {
   border-bottom: 1px solid grey;
   justify-content: end;
 }
-textarea {
+.otherInput {
+  border-radius: 10px;
+  padding: 10px;
   height: 20px;
+  width: 93%;
+  border: 1px solid grey;
+}
+textarea {
   resize: vertical;
 }
 .titleContainer {
@@ -115,5 +121,8 @@ textarea {
 .landingTitle {
   justify-self: start;
   align-self: center;
+}
+.bold {
+  font-weight: bold;
 }
 </style>

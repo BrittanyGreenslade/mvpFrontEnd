@@ -1,25 +1,48 @@
 <template>
   <div>
-    <div v-for="event in allEvents" :key="event.eventId">
-      <p>{{ event.eventId }}</p>
-      <p>{{ event.dateTime }}</p>
-      <h3>{{ event.eventName }}</h3>
-      <p>{{ event.cityName }}</p>
-      <p>{{ event.countryName }}</p>
-      <img :src="`${event.eventImageUrl}`" alt="event image" />
-      <attend-event :eventId="event.eventId" />
-      <delete-event :eventId="event.eventId" :hostId="event.hostId" />
-      <router-link :to="`/event/${event.eventId}`">View Event</router-link>
-      <!-- v-if="currentUserInfo.userId === event.hostId" -->
+    <div class="cmptHeader">
+      <h1>Browse Events</h1>
+      <button>
+        <router-link to="/createEvent">Create Event</router-link>
+      </button>
+    </div>
+    <div class="eventContainerParent">
+      <div
+        class="eventContainer"
+        v-for="event in allEvents"
+        :key="event.eventId"
+      >
+        <div class="eventContainerChild">
+          <div id="eventInfo">
+            <p class="bold">{{ event.dateTime }}</p>
+            <h3>{{ event.eventName }}</h3>
+            <p>{{ event.hostName }}</p>
+            <!-- add number of people attending maybe? -->
+            <p>{{ event.cityName }}</p>
+            <!-- <p>{{ event.countryName }}</p> -->
+            <router-link :to="`/event/${event.eventId}`"
+              >View Event</router-link
+            >
+          </div>
+          <img
+            class="eventImg"
+            :src="`${event.eventImageUrl}`"
+            alt="event image"
+          />
+        </div>
+        <!-- <attend-event :eventId="event.eventId" />
+      <delete-event :eventId="event.eventId" :hostId="event.hostId" /> -->
+        <!-- v-if="currentUserInfo.userId === event.hostId" -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import AttendEvent from "./AttendEvent.vue";
-import DeleteEvent from "./DeleteEvent.vue";
+// import AttendEvent from "./AttendEvent.vue";
+// import DeleteEvent from "./DeleteEvent.vue";
 export default {
-  components: { AttendEvent, DeleteEvent },
+  // components: { AttendEvent, DeleteEvent },
   name: "all-events",
   computed: {
     allEvents() {
@@ -36,9 +59,42 @@ export default {
       this.$store.dispatch("getAllEvents");
     }
   },
-  watch: {},
-  methods: {},
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cmptHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  place-items: center;
+  width: 90%;
+  margin-left: 20px;
+}
+.cmptHeader > h1 {
+  place-self: start;
+  margin-left: 10px;
+}
+.eventContainerParent {
+  display: grid;
+  row-gap: 15px;
+}
+.eventContainer {
+  width: 90%;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 2px 4px lightgrey;
+  place-self: center;
+}
+.eventContainerChild {
+  display: grid;
+  grid-auto-flow: column;
+  padding: 5px;
+}
+.eventContainerChild > img {
+  place-self: center;
+  width: 80px;
+}
+#eventInfo {
+  display: grid;
+}
+</style>

@@ -1,19 +1,64 @@
 <template>
-  <div>
-    <form action="javascript:void(0)">
-      <input type="text" placeholder="event name" required id="eventName" />
-      <input type="text" placeholder="city name" id="cityName" />
-      <input type="text" placeholder="country name" id="countryName" />
-      <input
-        type="text"
-        placeholder="description max length 500 characters"
-        id="description"
-      />
-      <input type="text" placeholder="event image url" id="eventImg" />
+  <div class="componentCtr">
+    <router-link to="/home">Home</router-link>
+    <form class="createEventForm" action="javascript:void(0)">
+      <div>
+        <h3>Event Name</h3>
+        <input
+          class="otherInput"
+          type="text"
+          placeholder="event name"
+          required
+          id="eventName"
+        />
+      </div>
+      <div>
+        <h3>Event City</h3>
+        <input
+          class="otherInput"
+          type="text"
+          placeholder="city name"
+          id="cityName"
+        />
+      </div>
       <!-- returns a DOMstring -->
-      <input type="datetime-local" id="dateTime" />
+      <div>
+        <h3>Event Date & Time</h3>
+        <input class="otherInput" type="datetime-local" id="dateTime" />
+      </div>
+      <div>
+        <h3>Event Image</h3>
+        <input
+          class="otherInput"
+          type="text"
+          placeholder="event image url"
+          id="eventImg"
+        />
+      </div>
+      <!-- <h3>Event Country</h3>
+      <input
+        class="otherInput"
+        type="text"
+        placeholder="country name"
+        id="countryName"
+      /> -->
+      <div>
+        <h3>Event Description</h3>
+        <textarea
+          class="otherInput"
+          type="text"
+          placeholder="description max length 500 characters"
+          id="description"
+        />
+      </div>
       <!-- maybe put duration? -->
-      <button id="createEventBtn" @click="createEvent">create event</button>
+      <div class="btnContainer">
+        <router-link class="btn" to="/home">
+          <button class="btn">cancel</button></router-link
+        >
+
+        <button class="btn" @click="createEvent">create event</button>
+      </div>
     </form>
   </div>
 </template>
@@ -61,4 +106,26 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.createEventForm {
+  display: grid;
+  row-gap: 15px;
+  place-self: center;
+  width: 85%;
+  /* margin-top: 30px; */
+}
+.componentCtr {
+  min-height: 100%;
+}
+#description {
+  height: 70px;
+}
+.btnContainer {
+  display: grid;
+  grid-auto-flow: column;
+}
+.btn {
+  place-self: center;
+  width: 100px;
+}
+</style>

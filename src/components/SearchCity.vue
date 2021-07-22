@@ -1,21 +1,28 @@
 <template>
-  <div>
-    <form autocomplete="off" action="javascript:void(0)" id="userCityInputForm">
-      <input
-        type="text"
-        placeholder="city name"
-        required
-        id="userCityInput"
-        @keyup="checkLength"
-      />
-    </form>
-    <div id="cityList">
-      <div
-        @click="selectCity(city)"
-        v-for="city in potentialUserCities"
-        :key="city.locationId"
+  <div class="componentCtr">
+    <div class="formParent">
+      <form
+        autocomplete="off"
+        action="javascript:void(0)"
+        id="userCityInputForm"
       >
-        <p>{{ city.cityName }}, {{ city.countryName }}</p>
+        <input
+          type="text"
+          placeholder="city name"
+          required
+          id="userCityInput"
+          class="otherInput"
+          @keyup="checkLength"
+        />
+      </form>
+      <div id="cityList">
+        <div
+          @click="selectCity(city)"
+          v-for="city in potentialUserCities"
+          :key="city.locationId"
+        >
+          <p>{{ city.cityName }}, {{ city.countryName }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -71,4 +78,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.componentCtr {
+  min-height: 10vh;
+}
+.formParent {
+  display: grid;
+  width: 100%;
+  place-items: center;
+}
+#userCityInputForm {
+  width: 70%;
+}
+</style>

@@ -1,14 +1,15 @@
 <template>
   <div id="headerCtr" v-if="loginToken">
-    <h1>COOL APP NAME</h1>
-    <!-- <router-link to="/home">Home</router-link> | -->
+    <router-link to="/home"><h1>COOL APP NAME</h1></router-link>
 
+    <!-- <router-link to="/home">Home</router-link> | -->
     <router-link :to="`/profile/${currentUserInfo.userId}`"
       ><img
         class="profileImg"
         :src="`${currentUserInfo.imageUrl}`"
         alt="current user profile picture"
     /></router-link>
+
     <!-- <logout-btn /> -->
   </div>
 </template>
@@ -40,6 +41,9 @@ export default {
   grid-template-columns: 4fr 1fr;
   place-items: center;
   margin-top: 10px;
+  border-bottom: 1px solid grey;
+  /* height: 10vh; */
+  align-self: start;
 }
 .profileImg {
   border-radius: 50px;

@@ -1,7 +1,7 @@
 <template>
   <div>
+    <h1>Maybe scrolly pics</h1>
     <search-events />
-    <router-link to="/createEvent">Create Event</router-link>
     <all-events v-if="eventsAtLocation === undefined" />
     <events-at-location v-else />
     <!-- <future-user-events />
