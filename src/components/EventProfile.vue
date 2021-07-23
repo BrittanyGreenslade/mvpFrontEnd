@@ -1,8 +1,8 @@
 <template>
   <div>
-    <img src="" alt="event image" />
     <h3>{{ event.hostName }}</h3>
-    <img :src="`${event.hostImage}`" alt="event host image" />
+    <img :src="`${event.eventImageUrl}`" alt="event image" />
+    <img :src="`${event.hostImageUrl}`" alt="event host image" />
 
     <h1>{{ event.eventName }}</h1>
     <h3>{{ event.dateTime }}</h3>
@@ -39,6 +39,9 @@ export default {
     },
   },
   mounted() {
+    console.log(this.event);
+    console.log(this.eventId);
+    console.log(this.usersEvents);
     //why is userEvents always undefined even when it's navigating from a page where
     //the call to get userEvents happens
     if (this.usersEvents === undefined) {
@@ -73,7 +76,10 @@ export default {
         .then((res) => {
           for (let i = 0; i < res.data.length; i++) {
             this.event = res.data[i];
+            console.log(res.data[i]);
           }
+
+          console.log(this.event);
         })
         .catch((err) => {
           console.log(err);

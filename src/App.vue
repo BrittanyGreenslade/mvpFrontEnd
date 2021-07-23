@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <page-header v-if="this.loginToken != undefined" />
-    <router-view />
-    <div id="footer">
-      <footer>Copyright 2021 Brittany Greenslade</footer>
-    </div>
+    <section>
+      <page-header
+        v-if="loginToken !== undefined && routePath != `/profile/${userId}`"
+      />
+      <router-view />
+      <page-footer />
+    </section>
   </div>
 </template>
 <script>
 // import cookies from "vue-cookies";
 import PageHeader from "./components/PageHeader.vue";
+import PageFooter from "./components/PageFooter.vue";
 export default {
-  components: { PageHeader },
+  components: { PageHeader, PageFooter },
   computed: {
     loginToken() {
       return this.$store.state.loginToken;
@@ -19,12 +22,15 @@ export default {
     routePath() {
       return this.$route.path;
     },
+    userId() {
+      return this.$route.params.userId;
+    },
   },
   watch: {
-    //routes to feed when link path is just /
+    //routes to home when link path is just /
     routePath(newValue, oldValue) {
       if (this.loginToken && newValue === "/") {
-        this.$router.push({ path: `/feed` });
+        this.$router.push({ path: `/home` });
       }
       //want to make it so if user navigates to login page, they're logged out.
       //does that matter? will someone ever do that seems silly but ppl are weird
@@ -51,6 +57,7 @@ export default {
 </script>
 
 <style>
+/* styling for all things in app */
 * {
   padding: 0;
   margin: 0;
@@ -63,7 +70,12 @@ export default {
   place-items: center;
 }
 /* all divs in app take up 100% */
-#app > div {
+#app > section > div {
+  height: 100%;
+  width: 100%;
+  display: grid;
+}
+#app > section {
   height: 100%;
   width: 100%;
 }
@@ -72,11 +84,6 @@ export default {
   display: grid;
   width: 100%;
   min-height: 80vh;
-}
-#footer {
-  height: 10vh;
-  display: grid;
-  place-items: center;
 }
 .btn {
   width: 35%;
@@ -104,6 +111,15 @@ export default {
   border-bottom: 1px solid grey;
   justify-content: end;
 }
+.landingTitle {
+  justify-self: start;
+  align-self: center;
+  font-size: 45px;
+}
+textarea {
+  resize: vertical;
+}
+/* input of create event/search bar */
 .otherInput {
   border-radius: 10px;
   padding: 10px;
@@ -111,18 +127,53 @@ export default {
   width: 93%;
   border: 1px solid grey;
 }
-textarea {
-  resize: vertical;
-}
+
 .titleContainer {
   display: grid;
   width: 70%;
 }
-.landingTitle {
-  justify-self: start;
-  align-self: center;
-}
+/* general styling */
 .bold {
   font-weight: bold;
+}
+.genGrid {
+  display: grid;
+}
+/* form styling */
+.formStyling {
+  display: grid;
+  row-gap: 15px;
+  place-self: center;
+  width: 85%;
+}
+
+/* event styling */
+.eventContainerParent {
+  display: grid;
+  row-gap: 15px;
+  margin-top: 15px;
+}
+.eventContainer {
+  width: 90%;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 2px 4px lightgrey;
+  place-self: center;
+}
+
+.eventContainerChild {
+  display: grid;
+  grid-auto-flow: column;
+  padding: 5px;
+}
+.eventContainerChild > img {
+  place-self: center;
+  width: 80px;
+}
+
+.actionIcon {
+  width: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 </style>

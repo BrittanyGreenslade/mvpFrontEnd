@@ -13,13 +13,12 @@
         :key="event.eventId"
       >
         <div class="eventContainerChild">
-          <div id="eventInfo">
+          <div class="genGrid">
             <p class="bold">{{ event.dateTime }}</p>
             <h3>{{ event.eventName }}</h3>
             <p>{{ event.hostName }}</p>
             <!-- add number of people attending maybe? -->
-            <p>{{ event.cityName }}</p>
-            <!-- <p>{{ event.countryName }}</p> -->
+            <p>{{ event.cityName }}, {{ event.countryName }}</p>
             <router-link :to="`/event/${event.eventId}`"
               >View Event</router-link
             >
@@ -73,28 +72,5 @@ export default {
 .cmptHeader > h1 {
   place-self: start;
   margin-left: 10px;
-}
-.eventContainerParent {
-  display: grid;
-  row-gap: 15px;
-}
-.eventContainer {
-  width: 90%;
-  border: 2px solid black;
-  border-radius: 15px;
-  box-shadow: 2px 4px lightgrey;
-  place-self: center;
-}
-.eventContainerChild {
-  display: grid;
-  grid-auto-flow: column;
-  padding: 5px;
-}
-.eventContainerChild > img {
-  place-self: center;
-  width: 80px;
-}
-#eventInfo {
-  display: grid;
 }
 </style>

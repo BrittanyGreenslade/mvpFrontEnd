@@ -1,31 +1,63 @@
 <template>
   <div>
-    <h1>{{ currentUserInfo.name }}'s Profile</h1>
-    <h5>Birthdate: {{ currentUserInfo.birthdate }}</h5>
-    <h5>{{ currentUserInfo.email }}</h5>
-    <p>{{ currentUserInfo.bio }}</p>
-    <p>{{ currentUserInfo.linkedInUrl }}</p>
-    <p>{{ currentUserInfo.cityName }}</p>
-    <p>{{ currentUserInfo.countryName }}</p>
-    <img
-      class="profileImg"
-      :src="`${currentUserInfo.imageUrl}`"
-      alt="current user profile picture"
-    />
-    <logout-btn />
-    <!-- <past-user-events /> -->
+    <div class="genGrid">
+      <div id="navCtr">
+        <router-link to="/home"
+          ><img
+            class="actionIcon"
+            src="../assets/close.svg"
+            alt="close user profile"
+        /></router-link>
+        <router-link id="editIcon" to="/editProfile"
+          ><img
+            class="actionIcon"
+            src="../assets/pen.png"
+            alt="edit user profile"
+        /></router-link>
+      </div>
+      <div id="userInfoCtr">
+        <!-- add other user's profile to this page too -->
+        <img
+          class="profileImg"
+          :src="`${currentUserInfo.imageUrl}`"
+          alt="user profile picture"
+        />
+        <h1>{{ currentUserInfo.name }}</h1>
+        <p>{{ currentUserInfo.cityName }}, {{ currentUserInfo.countryName }}</p>
+      </div>
+
+      <!-- <h5>Birthdate: {{ currentUserInfo.birthdate }}</h5> -->
+      <h5>{{ currentUserInfo.email }}</h5>
+      <p>{{ currentUserInfo.bio }}</p>
+      <p>{{ currentUserInfo.linkedInUrl }}</p>
+      <logout-btn />
+      <h1>{{ currentUserInfo.name }}'s Events</h1>
+      <div id="eventsTimeToggle">
+        <h3 @click="pastEventsView = false">Going</h3>
+        <h3 @click="pastEventsView = true">Past</h3>
+      </div>
+      <future-user-events v-if="pastEventsView === false" />
+      <past-user-events v-else />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import LogoutBtn from "./LogoutBtn.vue";
-// import PastUserEvents from "../components/PastUserEvents.vue";
+import FutureUserEvents from "./FutureUserEvents.vue";
+import PastUserEvents from "../components/PastUserEvents.vue";
 export default {
   name: "user-profile",
   components: {
     LogoutBtn,
-    // PastUserEvents,
+    FutureUserEvents,
+    PastUserEvents,
+  },
+  data() {
+    return {
+      pastEventsView: false,
+    };
   },
   computed: {
     currentUserInfo() {
@@ -64,7 +96,42 @@ export default {
 </script>
 
 <style scoped>
+.btn {
+  place-self: center;
+}
 .profileImg {
-  width: 200px;
+  width: 100px;
+  border-radius: 50%;
+}
+#userInfoCtr {
+  place-self: center;
+}
+#eventsTimeToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 90%;
+  border: 1px solid grey;
+  column-rule-color: grey;
+  place-self: center;
+}
+h3 {
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+h3:nth-child(1) {
+  border-right: 1px solid grey;
+}
+#navCtr {
+  display: grid;
+  width: 100%;
+  grid-auto-flow: column;
+}
+#editIcon {
+  justify-self: end;
+  width: 50px;
+}
+#editIcon > img {
+  width: 25px;
 }
 </style>

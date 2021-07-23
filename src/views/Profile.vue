@@ -1,25 +1,22 @@
 <template>
   <div>
-    <edit-profile />
     <user-profile />
-    <hr />
+    <!-- <hr />
     <future-user-events />
     <hr />
-    <past-user-events />
+    <past-user-events /> -->
   </div>
 </template>
 <script>
-import EditProfile from "../components/EditProfile.vue";
-import FutureUserEvents from "../components/FutureUserEvents.vue";
-import PastUserEvents from "../components/PastUserEvents.vue";
+// import FutureUserEvents from "../components/FutureUserEvents.vue";
+// import PastUserEvents from "../components/PastUserEvents.vue";
 import UserProfile from "../components/UserProfile.vue";
 export default {
   name: "profile",
   components: {
     UserProfile,
-    FutureUserEvents,
-    EditProfile,
-    PastUserEvents,
+    // FutureUserEvents,
+    // PastUserEvents,
   },
   computed: {
     currentUserInfo() {

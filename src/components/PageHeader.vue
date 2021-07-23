@@ -37,12 +37,11 @@ export default {
 
 <style scoped>
 #headerCtr {
-  display: grid;
   grid-template-columns: 4fr 1fr;
   place-items: center;
   margin-top: 10px;
   border-bottom: 1px solid grey;
-  /* height: 10vh; */
+  height: 10vh;
   align-self: start;
 }
 .profileImg {

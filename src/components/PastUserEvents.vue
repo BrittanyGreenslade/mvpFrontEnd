@@ -1,27 +1,39 @@
 <template>
-  <div>
-    <h2>Past Events</h2>
-    <div v-for="event in usersPastEvents" :key="event.eventId">
-      <router-link :to="`/event/${event.eventId}`">View Event</router-link>
-      <p>{{ event.dateTime }}</p>
-      <h3>{{ event.eventName }}</h3>
-      <p>{{ event.cityName }}</p>
-      <p>{{ event.countryName }}</p>
-      <img :src="`${event.eventImageUrl}`" alt="event image" />
-      <delete-event :eventId="event.eventId" :hostId="event.hostId" />
-      <attend-event :eventId="event.eventId" />
+  <div class="genGrid">
+    <div class="eventContainerParent">
+      <div
+        class="eventContainer"
+        v-for="event in usersPastEvents"
+        :key="event.eventId"
+      >
+        <div class="eventContainerChild">
+          <div class="genGrid">
+            <p class="bold">{{ event.dateTime }}</p>
+            <h3>{{ event.eventName }}</h3>
+            <p>{{ event.hostName }}</p>
+            <!-- add number of people attending maybe? -->
+            <p>{{ event.cityName }}, {{ event.countryName }}</p>
+            <router-link :to="`/event/${event.eventId}`"
+              >View Event</router-link
+            >
+          </div>
+          <img :src="`${event.eventImageUrl}`" alt="event image" />
+        </div>
+      </div>
+      <!-- <delete-event :eventId="event.eventId" :hostId="event.hostId" />
+        <attend-event :eventId="event.eventId" /> -->
     </div>
   </div>
 </template>
 
 <script>
-import DeleteEvent from "./DeleteEvent.vue";
-import AttendEvent from "./AttendEvent.vue";
+// import DeleteEvent from "./DeleteEvent.vue";
+// import AttendEvent from "./AttendEvent.vue";
 export default {
   name: "past-user-events",
   components: {
-    DeleteEvent,
-    AttendEvent,
+    // DeleteEvent,
+    // AttendEvent,
   },
 
   computed: {

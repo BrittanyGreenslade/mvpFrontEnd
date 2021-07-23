@@ -25,6 +25,7 @@ export default {
     AllEvents,
     SearchEvents,
     EventsAtLocation,
+
     // PastUserEvents,
   },
 };

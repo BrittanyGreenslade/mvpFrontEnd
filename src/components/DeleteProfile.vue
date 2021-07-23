@@ -1,9 +1,17 @@
 <template>
   <div>
-    <form action="javascript:void(0)">
-      <h2>Enter password to delete account</h2>
-      <input type="password" placeholder="password" id="deletePW" />
-      <button @click="deleteUser">Delete user account</button>
+    <form class="formStyling" action="javascript:void(0)">
+      <div class="titleContainer">
+        <h1 class="landingTitle">Delete Your</h1>
+        <h1 class="landingTitle">Account</h1>
+      </div>
+      <input
+        class="otherInput"
+        type="password"
+        placeholder="password"
+        id="deletePW"
+      />
+      <button class="btn" @click="deleteUser">Delete account</button>
     </form>
   </div>
 </template>
@@ -75,4 +83,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.formStyling {
+  width: 100%;
+}
+</style>

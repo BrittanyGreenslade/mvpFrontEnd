@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button @click="logout(loginToken)" id="logoutBtn">logout</button>
+    <button class="btn" @click="logout(loginToken)" id="logoutBtn">
+      logout
+    </button>
   </div>
 </template>
 

@@ -1,7 +1,11 @@
 <template>
   <div class="componentCtr">
-    <router-link to="/home">Home</router-link>
-    <form class="createEventForm" action="javascript:void(0)">
+    <!-- <router-link to="/home">Home</router-link> -->
+    <form class="formStyling" action="javascript:void(0)">
+      <div class="titleContainer">
+        <h1 class="landingTitle">Create An</h1>
+        <h1 class="landingTitle">Event</h1>
+      </div>
       <div>
         <h3>Event Name</h3>
         <input
@@ -107,15 +111,8 @@ export default {
 </script>
 
 <style scoped>
-.createEventForm {
-  display: grid;
-  row-gap: 15px;
-  place-self: center;
-  width: 85%;
-  /* margin-top: 30px; */
-}
 .componentCtr {
-  min-height: 100%;
+  margin-top: 30px;
 }
 #description {
   height: 70px;
@@ -127,5 +124,17 @@ export default {
 .btn {
   place-self: center;
   width: 100px;
+}
+.titleContainer {
+  width: 90%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.landingTitle {
+  margin-left: 10px;
+}
+.formStyling {
+  align-self: start;
+  height: 90%;
 }
 </style>

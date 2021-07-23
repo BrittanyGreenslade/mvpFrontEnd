@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import Event from "../views/Event.vue";
 import CreateEvent from "../views/CreateEvent.vue";
+import EditProfile from "../views/EditProfile.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/createEvent",
     name: "Create Event",
     component: CreateEvent,
+  },
+  {
+    path: "/editProfile",
+    name: "Edit Profile",
+    component: EditProfile,
   },
 ];
 
