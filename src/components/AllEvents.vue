@@ -23,11 +23,7 @@
               >View Event</router-link
             >
           </div>
-          <img
-            class="eventImg"
-            :src="`${event.eventImageUrl}`"
-            alt="event image"
-          />
+          <img :src="`${event.eventImageUrl}`" alt="event image" />
         </div>
         <!-- <attend-event :eventId="event.eventId" />
       <delete-event :eventId="event.eventId" :hostId="event.hostId" /> -->

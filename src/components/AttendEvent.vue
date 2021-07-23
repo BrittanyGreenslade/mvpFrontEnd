@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <button v-if="attending === false" @click="attendEvent">attend</button>
-    <button v-else @click="unattendEvent">unattend</button>
+  <div class="genGrid">
+    <button class="btn" v-if="attending === false" @click="attendEvent">
+      attend
+    </button>
+    <button class="btn" v-else @click="unattendEvent">unattend</button>
   </div>
 </template>
 
@@ -102,4 +104,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  margin-right: 10px;
+  width: 100px;
+}
+</style>

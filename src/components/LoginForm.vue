@@ -71,8 +71,11 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin-bottom: 30px;
+}
 .componentCtr {
-  height: 100%;
+  height: 90%;
   grid-template-rows: 1.5fr 0.5fr 1.75fr 0.5fr;
 }
 .userForm {

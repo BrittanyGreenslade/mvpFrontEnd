@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Maybe scrolly pics</h1>
-    <search-events />
+    <search-events id="searchBar" />
     <all-events v-if="eventsAtLocation === undefined" />
     <events-at-location v-else />
     <!-- <future-user-events />
@@ -31,4 +31,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#searchBar {
+  align-self: end;
+}
+</style>

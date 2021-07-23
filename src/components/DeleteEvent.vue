@@ -1,6 +1,7 @@
 <template>
   <div>
     <button
+      class="btn"
       v-if="this.currentUserInfo.userId === this.hostId"
       @click="deleteEvent"
     >
@@ -70,4 +71,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  width: 100px;
+}
+</style>

@@ -117,10 +117,6 @@ export default {
 #description {
   height: 70px;
 }
-.btnContainer {
-  display: grid;
-  grid-auto-flow: column;
-}
 .btn {
   place-self: center;
   width: 100px;

@@ -1,27 +1,40 @@
 <template>
   <div>
-    <h3>{{ event.hostName }}</h3>
-    <img :src="`${event.eventImageUrl}`" alt="event image" />
-    <img :src="`${event.hostImageUrl}`" alt="event host image" />
+    <div class="eventContainerChild">
+      <img class="eventImg" :src="`${event.eventImageUrl}`" alt="event image" />
+      <h3>Host: {{ event.hostName }}</h3>
+    </div>
+    <!-- <img :src="`${event.hostImageUrl}`" alt="event host image" /> -->
 
     <h1>{{ event.eventName }}</h1>
-    <h3>{{ event.dateTime }}</h3>
-    <h3>{{ event.cityName }}</h3>
-    <h3>{{ event.countryName }}</h3>
-    <h3>(Number attending)</h3>
-    <h3>{{ event.description }}</h3>
-    <attend-event :eventId="Number(eventId)" />
     <hr />
+    <div id="eventInfoCtr">
+      <p class="bold">{{ event.dateTime }}</p>
+      <h3>{{ event.cityName }}</h3>
+      <h3>{{ event.countryName }}</h3>
+      <!-- <h3>(Number attending)</h3> -->
+    </div>
+    <attend-event :eventId="Number(eventId)" />
+    <h3>{{ event.description }}</h3>
+    <hr />
+    <div class="btnContainer">
+      <button class="btn">
+        <router-link class="btn" to="/editEvent">edit</router-link>
+      </button>
+      <delete-event class="btn" :hostId="event.hostId" />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import AttendEvent from "./AttendEvent.vue";
+import DeleteEvent from "./DeleteEvent.vue";
 export default {
   name: "event-profile",
   components: {
     AttendEvent,
+    DeleteEvent,
   },
   data() {
     return {
@@ -89,4 +102,20 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.eventImg {
+  width: 80px;
+}
+.eventContainerChild {
+  place-items: center;
+}
+.btn {
+  place-self: center;
+  width: 100px;
+}
+#eventInfoCtr {
+  display: grid;
+  row-gap: 10px;
+  margin-top: 20px;
+}
+</style>

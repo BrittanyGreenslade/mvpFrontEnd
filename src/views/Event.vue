@@ -1,20 +1,17 @@
 <template>
   <div>
     <event-profile />
-    <edit-event />
-    <delete-event />
+    <!-- <delete-event /> -->
   </div>
 </template>
 <script>
-import DeleteEvent from "../components/DeleteEvent.vue";
-import EditEvent from "../components/EditEvent.vue";
+// import DeleteEvent from "../components/DeleteEvent.vue";
 import EventProfile from "../components/EventProfile.vue";
 export default {
   name: "event",
   components: {
     EventProfile,
-    EditEvent,
-    DeleteEvent,
+    // DeleteEvent,
   },
   computed: {
     // routePath() {

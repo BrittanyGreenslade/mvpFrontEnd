@@ -88,6 +88,7 @@ export default new Vuex.Store({
         .then((res) => {
           res;
           cookies.remove("loginToken");
+          //put null instead of undefined because that's what it is before cookies comitted initiallt
           context.commit("updateLoginToken", undefined);
           cookies.remove("currentUserInfo");
           context.commit("updateCurrentUserInfo", undefined);

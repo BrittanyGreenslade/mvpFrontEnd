@@ -2,10 +2,14 @@
   <div id="app">
     <section>
       <page-header
-        v-if="loginToken !== undefined && routePath != `/profile/${userId}`"
+        v-if="
+          (loginToken && routePath !== `/profile/${userId}`) ||
+            (loginToken && routePath !== `/login`) ||
+            (loginToken && routePath !== `/signup`)
+        "
       />
       <router-view />
-      <page-footer />
+      <page-footer v-if="loginToken" />
     </section>
   </div>
 </template>
@@ -41,6 +45,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.loginToken);
     if (this.loginToken && this.$route.path === "/") {
       this.$router.push({ path: `/home` });
     }
@@ -48,7 +53,7 @@ export default {
   },
   methods: {
     notifyLogin() {
-      if (this.loginToken === null) {
+      if (!this.loginToken) {
         this.$router.push({ path: `/login` });
       }
     },
@@ -94,6 +99,10 @@ export default {
   display: grid;
   place-items: center;
   place-self: end;
+}
+.btnContainer {
+  display: grid;
+  grid-auto-flow: column;
 }
 
 /* sign-up/login page */

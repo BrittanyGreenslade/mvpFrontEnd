@@ -175,7 +175,7 @@ export default {
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 2fr;
 }
 .componentCtr {
-  grid-template-rows: 0.5fr 0.1fr 0.6fr 0.1fr;
+  grid-template-rows: 0.5fr 0.5fr 2fr 0.5fr;
 }
 textarea {
   height: 20px;
