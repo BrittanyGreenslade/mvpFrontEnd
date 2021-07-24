@@ -1,15 +1,12 @@
 <template>
   <div id="pageCtr">
     <div>
+      <router-link id="backBtn" to="/home">Back</router-link>
       <div class="titleContainer">
         <h1 class="landingTitle">Edit Your</h1>
         <h1 class="landingTitle">Profile</h1>
       </div>
-      <form
-        class="formStyling"
-        action="javascript:void(0)"
-        id="editProfileForm"
-      >
+      <form class="formStyling" action="javascript:void(0)">
         <input class="otherInput" type="text" id="name" placeholder="name" />
         <input class="otherInput" type="text" id="email" placeholder="email" />
         <input
@@ -18,18 +15,34 @@
           id="password"
           placeholder="password"
         />
-        <input
+        <search-city id="searchBar" @getLocationInfo="handleChildUpdate" />
+        <!-- <div id="citySearchCtr">
+          <input
+            type="text"
+            placeholder="first 3 letters of your city"
+            required
+            class="landingInput"
+            id="cityName"
+            @keyup="checkLength"
+          />
+
+          <div id="cityList">
+            <div
+              @click="selectCity(city)"
+              v-for="city in potentialUserCities"
+              :key="city.locationId"
+            >
+              <p>{{ city.cityName }}, {{ city.countryName }}</p>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <input
           class="otherInput"
           type="text"
           id="cityName"
           placeholder="city name"
-        />
-        <input
-          class="otherInput"
-          type="text"
-          id="countryName"
-          placeholder="country name"
-        />
+        /> -->
         <input
           class="otherInput"
           type="text"
@@ -59,15 +72,27 @@
 import DeleteProfile from "./DeleteProfile.vue";
 import axios from "axios";
 import cookies from "vue-cookies";
+import SearchCity from "./SearchCity.vue";
 export default {
-  components: { DeleteProfile },
+  components: { DeleteProfile, SearchCity },
   name: "edit-profile-form",
+  data() {
+    return {
+      searchCity: undefined,
+    };
+  },
   computed: {
     loginToken() {
       return this.$store.state.loginToken;
     },
+    currentUserInfo() {
+      return this.$store.state.currentUserInfo;
+    },
   },
   methods: {
+    handleChildUpdate(data) {
+      this.searchCity = data;
+    },
     editProfile() {
       axios
         .request({
@@ -78,8 +103,8 @@ export default {
             name: document.getElementById("name").value,
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
-            cityName: document.getElementById("cityName").value,
-            countryName: document.getElementById("countryName").value,
+            cityName: this.searchCity.cityName,
+            countryName: this.searchCity.countryName,
             loginToken: this.loginToken,
             imageUrl: document.getElementById("imgUrl").value,
             linkedInUrl: document.getElementById("linkedInUrl").value,
@@ -89,7 +114,9 @@ export default {
         .then((res) => {
           cookies.set("currentUserInfo", res.data);
           this.$store.commit("updateCurrentUserInfo", res.data);
-          // this.navigateToProfile();
+          this.$router.push({
+            path: `/profile/${this.currentUserInfo.userId}`,
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -100,12 +127,12 @@ export default {
 </script>
 
 <style scoped>
+#searchBar {
+  width: 93%;
+}
 #pageCtr {
   justify-self: center;
-  margin-top: 50px;
-  display: grid;
-  place-items: center;
-  width: 90%;
+  margin-top: 20px;
 }
 #pageCtr div:nth-child(1),
 #deleteComp {

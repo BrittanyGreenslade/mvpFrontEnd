@@ -34,5 +34,12 @@ export default {
 <style scoped>
 #searchBar {
   align-self: end;
+  width: 80%;
+  place-self: center;
+  border-radius: 10px;
+  padding: 10px;
+  padding-bottom: 20px;
+  height: 20px;
+  border: 1px solid grey;
 }
 </style>

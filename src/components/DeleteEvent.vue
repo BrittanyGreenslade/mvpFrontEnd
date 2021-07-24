@@ -61,10 +61,16 @@ export default {
               this.$store.commit("deleteEvent", i);
             }
           }
+          this.$router.push({
+            path: "/home",
+          });
+
           res;
         })
         .catch((err) => {
           console.log(err);
+          console.log(this.eventId);
+          console.log(this.loginToken);
         });
     },
   },

@@ -11,6 +11,14 @@ export default {
   components: {
     SignUpForm,
   },
+
+  mounted() {
+    if (this.loginToken) {
+      this.$router.push({
+        path: "/home",
+      });
+    }
+  },
 };
 </script>
 

@@ -1,29 +1,23 @@
 <template>
-  <div class="componentCtr">
-    <!-- ignore for now -->
-    <div class="formParent">
-      <form
-        autocomplete="off"
-        action="javascript:void(0)"
-        id="userCityInputForm"
+  <!-- ignore for now -->
+  <div id="citySearchCtr">
+    <input
+      autocomplete="off"
+      type="text"
+      placeholder="first 3 letters of your city"
+      required
+      class="landingInput"
+      id="cityName"
+      @keyup="checkLength"
+    />
+
+    <div id="cityList">
+      <div
+        @click="selectCity(city)"
+        v-for="city in potentialUserCities"
+        :key="city.locationId"
       >
-        <input
-          type="text"
-          placeholder="city name"
-          required
-          id="userCityInput"
-          class="otherInput"
-          @keyup="checkLength"
-        />
-      </form>
-      <div id="cityList">
-        <div
-          @click="selectCity(city)"
-          v-for="city in potentialUserCities"
-          :key="city.locationId"
-        >
-          <p>{{ city.cityName }}, {{ city.countryName }}</p>
-        </div>
+        <p>{{ city.cityName }}, {{ city.countryName }}</p>
       </div>
     </div>
   </div>
@@ -41,20 +35,27 @@ export default {
   },
   methods: {
     notifyParent() {
-      this.$emit("customEvent", this.searchCity);
+      this.$emit("getLocationInfo", this.searchCity);
     },
     selectCity(city) {
-      //city user searched in input - used in html and searchCity.id
-      //as argument in 'withinDistance' fn
       this.searchCity = city;
       document.getElementById("cityList").style.display = "none";
-      document.getElementById("userCityInputForm").reset();
+      //keeps the city in the input so user can see what they've chosen
+      document.getElementById(
+        "cityName"
+      ).value = `${city.cityName}, ${city.countryName}`;
       this.notifyParent();
+      //city user searched in input - used in html and searchCity.id
+      //as argument in 'withinDistance' fn
+      //and as param in 'getUserCity' fn below
     },
     checkLength() {
       //checks len of the city input to make api call when length is 3 characters or more
-      if (document.getElementById("userCityInput").value.length >= 3) {
+      if (document.getElementById("cityName").value.length >= 3) {
         this.getCities();
+        document.getElementById("cityList").style.display = "grid";
+        document.getElementById("cityList").style.position = "absolute";
+        document.getElementById("cityList").style.border = "1px solid black";
       }
     },
     getCities() {
@@ -64,7 +65,7 @@ export default {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            firstThree: document.getElementById("userCityInput").value,
+            firstThree: document.getElementById("cityName").value,
           },
         })
         .then((res) => {
@@ -80,15 +81,23 @@ export default {
 </script>
 
 <style scoped>
-.componentCtr {
-  min-height: 10vh;
-}
 .formParent {
   display: grid;
   width: 100%;
   place-items: center;
 }
 #userCityInputForm {
-  width: 70%;
+  width: auto;
+}
+#userCityInput {
+  width: 80%;
+}
+#citySearchCtr {
+  width: 100%;
+}
+#cityList {
+  background: white;
+  width: 80%;
+  /* border: 1px solid black; */
 }
 </style>

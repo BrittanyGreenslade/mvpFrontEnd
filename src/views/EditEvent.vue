@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="componentCtr">
     <edit-event-form />
   </div>
 </template>
@@ -14,4 +14,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#componentCtr {
+  height: 80%;
+}
+</style>

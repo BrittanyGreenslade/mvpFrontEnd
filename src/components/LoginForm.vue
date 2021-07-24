@@ -38,12 +38,18 @@ import cookies from "vue-cookies";
 
 export default {
   name: "login-form",
+  computed: {
+    loginToken() {
+      return this.$store.state.loginToken;
+    },
+  },
   methods: {
     navigateToHome() {
       this.$router.push({
         path: "/home",
       });
     },
+
     login() {
       axios
         .request({

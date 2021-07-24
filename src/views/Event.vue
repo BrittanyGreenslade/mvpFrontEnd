@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="componentCtr">
     <event-profile />
     <!-- <delete-event /> -->
   </div>
@@ -24,4 +24,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#componentCtr {
+  height: auto;
+}
+</style>

@@ -47,7 +47,7 @@
         maxlength="300"
         minlength="1"
       />
-      <div id="citySearchCtr">
+      <!-- <div id="citySearchCtr">
         <input
           type="text"
           placeholder="first 3 letters of your city"
@@ -66,8 +66,8 @@
             <p>{{ city.cityName }}, {{ city.countryName }}</p>
           </div>
         </div>
-      </div>
-
+      </div> -->
+      <search-city @getLocationInfo="handleChildUpdate" />
       <button @click="userSignup" class="btn">
         register
       </button>
@@ -81,11 +81,16 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
+import SearchCity from "./SearchCity.vue";
 export default {
+  components: { SearchCity },
   name: "sign-up-form",
   computed: {
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
+    },
+    loginToken() {
+      return this.$store.state.loginToken;
     },
   },
   data() {
@@ -94,50 +99,54 @@ export default {
       searchCity: undefined,
     };
   },
+
   methods: {
+    handleChildUpdate(data) {
+      this.searchCity = data;
+    },
     navigateToHome() {
       this.$router.push({
         path: `/home`,
       });
     },
-    selectCity(city) {
-      document.getElementById("cityList").style.display = "none";
-      //keeps the city in the input so user can see what they've chosen
-      document.getElementById(
-        "cityName"
-      ).value = `${city.cityName}, ${city.countryName}`;
+    // selectCity(city) {
+    //   document.getElementById("cityList").style.display = "none";
+    //   //keeps the city in the input so user can see what they've chosen
+    //   document.getElementById(
+    //     "cityName"
+    //   ).value = `${city.cityName}, ${city.countryName}`;
 
-      //city user searched in input - used in html and searchCity.id
-      //as argument in 'withinDistance' fn
-      //and as param in 'getUserCity' fn below
-      this.searchCity = city;
-    },
-    checkLength() {
-      //checks len of the city input to make api call when length is 3 characters or more
-      if (document.getElementById("cityName").value.length >= 3) {
-        this.getCities();
-        document.getElementById("cityList").style.display = "grid";
-        document.getElementById("cityList").style.position = "absolute";
-      }
-    },
-    getCities() {
-      axios
-        .request({
-          url: `${process.env.VUE_APP_API_URL}/location`,
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          params: {
-            firstThree: document.getElementById("cityName").value,
-          },
-        })
-        .then((res) => {
-          //just to show a list of city IDs locally based on the first 3 letters user typed
-          this.potentialUserCities = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    //   //city user searched in input - used in html and searchCity.id
+    //   //as argument in 'withinDistance' fn
+    //   //and as param in 'getUserCity' fn below
+    //   this.searchCity = city;
+    // },
+    // checkLength() {
+    //   //checks len of the city input to make api call when length is 3 characters or more
+    //   if (document.getElementById("cityName").value.length >= 3) {
+    //     this.getCities();
+    //     document.getElementById("cityList").style.display = "grid";
+    //     document.getElementById("cityList").style.position = "absolute";
+    //   }
+    // },
+    // getCities() {
+    //   axios
+    //     .request({
+    //       url: `${process.env.VUE_APP_API_URL}/location`,
+    //       method: "GET",
+    //       headers: { "Content-Type": "application/json" },
+    //       params: {
+    //         firstThree: document.getElementById("cityName").value,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       //just to show a list of city IDs locally based on the first 3 letters user typed
+    //       this.potentialUserCities = res.data;
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
     userSignup() {
       axios
         .request({

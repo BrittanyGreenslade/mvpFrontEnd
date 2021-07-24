@@ -1,27 +1,32 @@
 <template>
-  <div>
+  <div id="compCtr">
+    <router-link id="backBtn" to="/home">Back</router-link>
     <div class="eventContainerChild">
       <img class="eventImg" :src="`${event.eventImageUrl}`" alt="event image" />
       <h3>Host: {{ event.hostName }}</h3>
     </div>
     <!-- <img :src="`${event.hostImageUrl}`" alt="event host image" /> -->
+    <div id="eventCtr">
+      <h1>{{ event.eventName }}</h1>
+      <div id="eventInfoCtr">
+        <h3>{{ eventDate }}</h3>
+        <p>{{ eventTime }} (UTC)</p>
+        <h2>{{ event.cityName }}, {{ event.countryName }}</h2>
+        <!-- <h3>(Number attending)</h3> -->
+      </div>
+      <attend-event :eventId="Number(eventId)" />
 
-    <h1>{{ event.eventName }}</h1>
-    <hr />
-    <div id="eventInfoCtr">
-      <p class="bold">{{ event.dateTime }}</p>
-      <h3>{{ event.cityName }}</h3>
-      <h3>{{ event.countryName }}</h3>
-      <!-- <h3>(Number attending)</h3> -->
-    </div>
-    <attend-event :eventId="Number(eventId)" />
-    <h3>{{ event.description }}</h3>
-    <hr />
-    <div class="btnContainer">
-      <button class="btn">
-        <router-link class="btn" to="/editEvent">edit</router-link>
-      </button>
-      <delete-event class="btn" :hostId="event.hostId" />
+      <p id="desc">{{ event.description }}</p>
+      <div v-if="event.hostId === currentUserInfo.userId" class="btnContainer">
+        <button class="btn">
+          <router-link class="btn" to="/editEvent">edit</router-link>
+        </button>
+        <delete-event
+          :eventId="event.eventId"
+          class="btn"
+          :hostId="event.hostId"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +44,8 @@ export default {
   data() {
     return {
       event: {},
+      eventTime: "",
+      eventDate: "",
     };
   },
   computed: {
@@ -46,15 +53,14 @@ export default {
     eventId() {
       return this.$route.params.eventId;
     },
-
+    currentUserInfo() {
+      return this.$store.state.currentUserInfo;
+    },
     usersEvents() {
       return this.$store.state.usersEvents;
     },
   },
   mounted() {
-    console.log(this.event);
-    console.log(this.eventId);
-    console.log(this.usersEvents);
     //why is userEvents always undefined even when it's navigating from a page where
     //the call to get userEvents happens
     if (this.usersEvents === undefined) {
@@ -68,8 +74,14 @@ export default {
     //this path and make that the event stored in this page's data
     oneEvent() {
       for (let i = 0; i < this.usersEvents.length; i++) {
-        if (this.usersEvents[i].eventId === Number(this.eventId)) {
+        if (Number(this.usersEvents[i].eventId) === Number(this.eventId)) {
           this.event = this.usersEvents[i];
+          //substring starts from index 0 and extracts up to the end number if given
+          //but not including end num
+          //if it's not given, it extracts the rest of the string
+          this.eventDate = this.usersEvents[i].dateTime.substring(0, 10);
+          this.eventTime = this.usersEvents[i].dateTime.substring(10);
+
           return;
           //anything after this won't happen if event is found
         }
@@ -89,10 +101,9 @@ export default {
         .then((res) => {
           for (let i = 0; i < res.data.length; i++) {
             this.event = res.data[i];
-            console.log(res.data[i]);
+            this.eventDate = res.data[i].dateTime.substring(0, 10);
+            this.eventTime = res.data[i].dateTime.substring(10);
           }
-
-          console.log(this.event);
         })
         .catch((err) => {
           console.log(err);
@@ -103,19 +114,56 @@ export default {
 </script>
 
 <style scoped>
+#compCtr {
+  height: 100%;
+  width: 80%;
+  justify-self: center;
+  margin-top: 30px;
+}
 .eventImg {
-  width: 80px;
+  width: 150px;
 }
 .eventContainerChild {
   place-items: center;
+  height: 15%;
+  margin-top: 15px;
 }
 .btn {
   place-self: center;
   width: 100px;
 }
+#desc {
+  font-size: 18px;
+  margin-top: 30px;
+}
 #eventInfoCtr {
+  height: 35%;
   display: grid;
-  row-gap: 10px;
+  row-gap: 5px;
   margin-top: 20px;
+}
+#eventCtr {
+  display: grid;
+  min-height: 50%;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 0.5fr 2.5fr;
+}
+#eventCtr > h1 {
+  border-bottom: 1px solid grey;
+  font-size: 30px;
+  padding-bottom: 5px;
+}
+.componentCtr {
+  height: 70%;
+  min-height: 60%;
+}
+.genGrid {
+  height: 40%;
+  margin-top: 30px;
+}
+.genGrid h1 {
+  border-bottom: 1px solid grey;
+  font-size: 40px;
 }
 </style>

@@ -23,15 +23,17 @@
           alt="user profile picture"
         />
         <h1>{{ currentUserInfo.name }}</h1>
-        <p>{{ currentUserInfo.cityName }}, {{ currentUserInfo.countryName }}</p>
+        <p id="location">
+          {{ currentUserInfo.cityName }}, {{ currentUserInfo.countryName }}
+        </p>
+        <h4>{{ currentUserInfo.email }}</h4>
+        <p>{{ currentUserInfo.linkedInUrl }}</p>
+        <logout-btn id="logoutBtn" />
       </div>
 
       <!-- <h5>Birthdate: {{ currentUserInfo.birthdate }}</h5> -->
-      <h5>{{ currentUserInfo.email }}</h5>
-      <p>{{ currentUserInfo.bio }}</p>
-      <p>{{ currentUserInfo.linkedInUrl }}</p>
-      <logout-btn />
-      <h1>{{ currentUserInfo.name }}'s Events</h1>
+
+      <!-- <h1 id="eventsTitle">Events</h1> -->
       <div id="eventsTimeToggle">
         <h3 @click="pastEventsView = false">Going</h3>
         <h3 @click="pastEventsView = true">Past</h3>
@@ -96,8 +98,13 @@ export default {
 </script>
 
 <style scoped>
-.btn {
-  place-self: center;
+#eventsTitle {
+  margin-left: 20px;
+  font-size: 30px;
+}
+#logoutBtn {
+  width: 200px;
+  margin-top: 3px;
 }
 .profileImg {
   width: 100px;
@@ -105,22 +112,28 @@ export default {
 }
 #userInfoCtr {
   place-self: center;
+  display: grid;
+  place-items: center;
+  margin-bottom: 30px;
+  row-gap: 2px;
 }
 #eventsTimeToggle {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 90%;
-  border: 1px solid grey;
-  column-rule-color: grey;
   place-self: center;
+}
+#location {
+  font-size: 14px;
+  font-style: italic;
 }
 h3 {
   display: grid;
   place-items: center;
   width: 100%;
 }
-h3:nth-child(1) {
-  border-right: 1px solid grey;
+h1 {
+  font-size: 35px;
 }
 #navCtr {
   display: grid;

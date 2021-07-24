@@ -1,15 +1,40 @@
 <template>
-  <div>
-    <h1>Edit event</h1>
-    <form action="javascript:void(0)" id="editEventForm">
-      <input type="text" id="eventName" placeholder="event name" />
-      <input type="text" id="description" placeholder="description" />
-      <input type="datetime-local" id="dateTime" />
-      <input type="password" id="eventImageUrl" placeholder="event img url" />
-      <input type="text" id="cityName" placeholder="city name" />
-      <input type="text" id="countryName" placeholder="country name" />
-      <button @click="editEvent" id="editBtn">edit</button>
-    </form>
+  <div id="pageCtr">
+    <div>
+      <router-link id="backBtn" to="/home">Back</router-link>
+      <div class="titleContainer">
+        <h1 class="landingTitle">Edit</h1>
+        <h1 class="landingTitle">Event</h1>
+      </div>
+      <form class="formStyling" action="javascript:void(0)">
+        <input
+          class="otherInput"
+          type="text"
+          id="eventName"
+          placeholder="event name"
+        />
+        <input
+          class="otherInput"
+          type="text"
+          id="description"
+          placeholder="description"
+        />
+        <input class="otherInput" type="datetime-local" id="dateTime" />
+        <input
+          class="otherInput"
+          type="password"
+          id="eventImageUrl"
+          placeholder="event img url"
+        />
+        <input
+          class="otherInput"
+          type="text"
+          id="cityName"
+          placeholder="city name"
+        />
+        <button class="btn" @click="editEvent" id="editBtn">edit</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -53,12 +78,8 @@ export default {
               this.allEvents[i] = res.data;
             }
           }
-          //error in SQL syntax
-          // this.navigateToProfile();
         })
         .catch((err) => {
-          console.log(this.eventId);
-          console.log(this.loginToken);
           console.log(err);
         });
     },
@@ -66,4 +87,21 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* .genGrid {
+  justify-items: center;
+} */
+#pageCtr {
+  height: 70%;
+  justify-self: center;
+  margin-top: 50px;
+  justify-items: center;
+}
+#pageCtr div:nth-child(1) {
+  height: auto;
+  width: 90%;
+}
+.formStyling {
+  width: 100%;
+}
+</style>

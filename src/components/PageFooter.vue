@@ -15,5 +15,6 @@ export default {
   height: 10vh;
   place-items: center;
   width: 100%;
+  border-top: 1px solid grey;
 }
 </style>

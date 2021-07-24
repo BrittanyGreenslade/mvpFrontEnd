@@ -3,13 +3,16 @@
     <section>
       <page-header
         v-if="
-          (loginToken && routePath !== `/profile/${userId}`) ||
-            (loginToken && routePath !== `/login`) ||
-            (loginToken && routePath !== `/signup`)
+          loginToken &&
+            routePath !== `/profile/${userId}` &&
+            loginToken &&
+            routePath !== `/login` &&
+            loginToken &&
+            routePath !== `/signup`
         "
       />
       <router-view />
-      <page-footer v-if="loginToken" />
+      <page-footer id="footer" v-if="loginToken" />
     </section>
   </div>
 </template>
@@ -36,8 +39,7 @@ export default {
       if (this.loginToken && newValue === "/") {
         this.$router.push({ path: `/home` });
       }
-      //want to make it so if user navigates to login page, they're logged out.
-      //does that matter? will someone ever do that seems silly but ppl are weird
+
       // else if (newValue === "/login") {
       //   this.$store.dispatch("logout", this.loginToken);
       // }
@@ -45,7 +47,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.loginToken);
     if (this.loginToken && this.$route.path === "/") {
       this.$router.push({ path: `/home` });
     }
@@ -73,6 +74,7 @@ export default {
   width: 100%;
   display: grid;
   place-items: center;
+  align-items: start;
 }
 /* all divs in app take up 100% */
 #app > section > div {
@@ -81,14 +83,14 @@ export default {
   display: grid;
 }
 #app > section {
-  height: 100%;
   width: 100%;
+  height: 100%;
 }
 .componentCtr {
   place-items: center;
   display: grid;
   width: 100%;
-  min-height: 80vh;
+  min-height: 60vh;
 }
 .btn {
   width: 35%;
@@ -123,7 +125,7 @@ export default {
 .landingTitle {
   justify-self: start;
   align-self: center;
-  font-size: 45px;
+  font-size: 35px;
 }
 textarea {
   resize: vertical;
@@ -137,9 +139,20 @@ textarea {
   border: 1px solid grey;
 }
 
+#searchBar {
+  align-self: end;
+  width: 80%;
+  place-self: center;
+  border-radius: 10px;
+  padding: 10px;
+  padding-bottom: 20px;
+  height: 20px;
+  border: 1px solid grey;
+}
 .titleContainer {
   display: grid;
   width: 70%;
+  margin-bottom: 20px;
 }
 /* general styling */
 .bold {
@@ -161,6 +174,7 @@ textarea {
   display: grid;
   row-gap: 15px;
   margin-top: 15px;
+  height: 80%;
 }
 .eventContainer {
   width: 90%;
@@ -184,5 +198,10 @@ textarea {
   width: 20px;
   margin-left: 10px;
   margin-top: 10px;
+}
+#pageCtr {
+  display: grid;
+  place-items: center;
+  width: 90%;
 }
 </style>

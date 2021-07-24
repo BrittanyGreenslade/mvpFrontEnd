@@ -21,9 +21,7 @@ export default {
   components: {
     // LogoutBtn,
   },
-  mounted() {
-    console.log(this.currentUserInfo.imageUrl);
-  },
+
   computed: {
     loginToken() {
       return this.$store.state.loginToken;
