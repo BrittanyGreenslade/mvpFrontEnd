@@ -12,6 +12,8 @@
         <h3>{{ eventDate }}</h3>
         <p>{{ eventTime }} (UTC)</p>
         <h2>{{ event.cityName }}, {{ event.countryName }}</h2>
+
+        <event-attendees />
         <!-- <h3>(Number attending)</h3> -->
       </div>
       <attend-event :eventId="Number(eventId)" />
@@ -34,10 +36,12 @@
 <script>
 import axios from "axios";
 import AttendEvent from "./AttendEvent.vue";
+import EventAttendees from "./EventAttendees.vue";
 import DeleteEvent from "./DeleteEvent.vue";
 export default {
   name: "event-profile",
   components: {
+    EventAttendees,
     AttendEvent,
     DeleteEvent,
   },
@@ -86,7 +90,7 @@ export default {
           //anything after this won't happen if event is found
         }
       }
-      this.getOneEvent(this.eventId);
+      this.getOneEvent(Number(this.eventId));
     },
     getOneEvent(eventId) {
       axios
@@ -106,6 +110,7 @@ export default {
           }
         })
         .catch((err) => {
+          console.log(this.eventId);
           console.log(err);
         });
     },
@@ -147,9 +152,10 @@ export default {
   min-height: 50%;
   margin-bottom: 30px;
   display: grid;
-  grid-template-rows: 1fr 1fr 0.5fr 2.5fr;
+  grid-template-rows: 0.5fr 1fr 0.5fr 2.5fr;
 }
 #eventCtr > h1 {
+  align-self: end;
   border-bottom: 1px solid grey;
   font-size: 30px;
   padding-bottom: 5px;

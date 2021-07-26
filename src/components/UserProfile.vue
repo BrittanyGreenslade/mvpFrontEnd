@@ -8,7 +8,10 @@
             src="../assets/close.svg"
             alt="close user profile"
         /></router-link>
-        <router-link id="editIcon" to="/editProfile"
+        <router-link
+          v-if="Number(userId) === this.currentUserInfo.userId"
+          id="editIcon"
+          to="/editProfile"
           ><img
             class="actionIcon"
             src="../assets/pen.png"
@@ -19,24 +22,25 @@
         <!-- add other user's profile to this page too -->
         <img
           class="profileImg"
-          :src="`${currentUserInfo.imageUrl}`"
+          :src="`${userInfo.imageUrl}`"
           alt="user profile picture"
         />
-        <h1>{{ currentUserInfo.name }}</h1>
-        <p id="location">
-          {{ currentUserInfo.cityName }}, {{ currentUserInfo.countryName }}
-        </p>
-        <h4>{{ currentUserInfo.email }}</h4>
-        <p>{{ currentUserInfo.linkedInUrl }}</p>
-        <logout-btn id="logoutBtn" />
+        <h1>{{ userInfo.name }}</h1>
+        <p id="location">{{ userInfo.cityName }}, {{ userInfo.countryName }}</p>
+        <h4>{{ userInfo.email }}</h4>
+        <p>{{ userInfo.linkedInUrl }}</p>
+        <logout-btn
+          v-if="Number(userId) === this.currentUserInfo.userId"
+          id="logoutBtn"
+        />
       </div>
 
       <!-- <h5>Birthdate: {{ currentUserInfo.birthdate }}</h5> -->
 
       <!-- <h1 id="eventsTitle">Events</h1> -->
       <div id="eventsTimeToggle">
-        <h3 @click="pastEventsView = false">Going</h3>
-        <h3 @click="pastEventsView = true">Past</h3>
+        <h3 id="going" @click="futureEventsViewOn">Going</h3>
+        <h3 id="past" @click="pastEventsViewOn">Past</h3>
       </div>
       <future-user-events v-if="pastEventsView === false" />
       <past-user-events v-else />
@@ -59,22 +63,70 @@ export default {
   data() {
     return {
       pastEventsView: false,
+      userInfo: {},
     };
   },
   computed: {
+    userId() {
+      return this.$route.params.userId;
+    },
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
+    },
+    allUsers() {
+      return this.$store.state.allUsers;
     },
     usersEvents() {
       return this.$store.state.usersEvents;
     },
   },
-  // mounted() {
-  //   if (this.usersEvents === undefined) {
-  //     this.$store.dispatch("getUsersEvents", this.userId);
-  //   }
-  // },
+  mounted() {
+    //need this for when currentUser updates their profile and it doesn't do a
+    //call to get user info.
+    this.checkUser();
+    document.getElementById("going").style.color = "blue";
+    //will change value of getters once this is dispatched
+    if (this.usersEvents === undefined) {
+      this.$store.dispatch("getUsersEvents", this.userId);
+    }
+    if (this.allUsers === undefined) {
+      this.viewUserProfile(Number(this.userId));
+    } else {
+      this.oneUser();
+    }
+  },
   methods: {
+    //need this for when currentUser updates their profile and it doesn't do a
+    //call to get user info.
+    checkUser() {
+      if (Number(this.userId) === this.currentUserInfo.userId) {
+        this.userInfo = this.currentUserInfo;
+      }
+    },
+    oneUser() {
+      for (let i = 0; i < this.allUsers.length; i++) {
+        if (Number(this.allUsers[i].userId) === Number(this.userId)) {
+          this.user = this.allUsers[i];
+          return;
+          //anything after this won't happen if event is found
+        }
+      }
+      this.viewUserProfile(this.eventId);
+    },
+    futureEventsViewOn() {
+      if (this.pastEventsView === true) {
+        this.pastEventsView = false;
+      }
+      document.getElementById("going").style.color = "blue";
+      document.getElementById("past").style.color = "black";
+    },
+    pastEventsViewOn() {
+      if (this.pastEventsView === false) {
+        this.pastEventsView = true;
+      }
+      document.getElementById("going").style.color = "black";
+      document.getElementById("past").style.color = "blue";
+    },
     viewUserProfile() {
       axios
         .request({
@@ -83,10 +135,14 @@ export default {
             "Content-Type": "application/json",
           },
           params: {
-            userId: this.currentUserInfo.userId,
+            userId: this.userId,
           },
         })
         .then((res) => {
+          for (let i = 0; i < res.data.length; i++) {
+            this.userInfo = res.data[i];
+          }
+          console.log(res.data);
           res;
         })
         .catch((err) => {

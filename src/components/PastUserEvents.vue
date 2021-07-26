@@ -1,6 +1,9 @@
 <template>
   <div class="genGrid">
     <div class="eventContainerParent">
+      <h3 v-if="usersPastEvents.length === 0">
+        This user has not attended any events
+      </h3>
       <div
         class="eventContainer"
         v-for="event in usersPastEvents"
@@ -20,28 +23,16 @@
           <img :src="`${event.eventImageUrl}`" alt="event image" />
         </div>
       </div>
-      <!-- <delete-event :eventId="event.eventId" :hostId="event.hostId" />
-        <attend-event :eventId="event.eventId" /> -->
     </div>
   </div>
 </template>
 
 <script>
-// import DeleteEvent from "./DeleteEvent.vue";
-// import AttendEvent from "./AttendEvent.vue";
 export default {
   name: "past-user-events",
-  components: {
-    // DeleteEvent,
-    // AttendEvent,
-  },
-
   computed: {
     userId() {
       return this.$route.params.userId;
-    },
-    currentUserInfo() {
-      return this.$store.state.currentUserInfo;
     },
     usersPastEvents() {
       return this.$store.getters.usersPastEvents;
@@ -51,23 +42,18 @@ export default {
     },
   },
   mounted() {
-    //do a check to see if usersEvents isn't undefined
-    //change id to the prop here when there is one?
     if (this.usersEvents === undefined) {
-      this.$store.dispatch("getUsersEvents", this.userId);
+      this.$store.dispatch("getUsersEvents", Number(this.userId));
     }
   },
-
-  // methods: {
-  //       checkUserEvents() {
-  //     for (let i = 0; i < this.usersEvents.length; i++) {
-  //       if (this.usersEvents[i].eventId === this.eventId) {
-  //         this.attending = true;
-  //       }
-  //     }
-  //   },
-  // },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.eventContainerParent h3:nth-child(1) {
+  place-self: center;
+  margin-top: 40px;
+  width: 80%;
+  text-align: center;
+}
+</style>

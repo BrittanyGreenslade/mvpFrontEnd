@@ -1,19 +1,22 @@
 <template>
-  <div>
+  <div id="pgCtr">
+    <h3 v-if="eventsNearLocation.length === 0">
+      No events listed at this location
+    </h3>
+    <p @click="notifyParent">Home</p>
     <div class="eventContainerParent">
-      <h3 v-if="usersFutureEvents.length === 0">
-        This user is not registed for any future events
-      </h3>
       <div
         class="eventContainer"
-        v-for="event in usersFutureEvents"
+        v-for="event in eventsNearLocation"
         :key="event.eventId"
       >
         <div class="eventContainerChild">
           <div class="genGrid">
             <p class="bold">{{ event.dateTime }}</p>
             <h3>{{ event.eventName }}</h3>
-            <p>{{ event.hostName }}</p>
+            <p>
+              <b><u>Host:</u></b> {{ event.hostName }}
+            </p>
             <p>{{ event.cityName }}, {{ event.countryName }}</p>
             <router-link :to="`/event/${event.eventId}`"
               >View Event</router-link
@@ -28,31 +31,39 @@
 
 <script>
 export default {
-  name: "future-user-events",
+  name: "events-near-location",
   computed: {
-    userId() {
-      return this.$route.params.userId;
+    currentUserInfo() {
+      return this.$store.state.currentUserInfo;
     },
-    usersFutureEvents() {
-      return this.$store.getters.usersFutureEvents;
-    },
-    usersEvents() {
-      return this.$store.state.usersEvents;
+    eventsNearLocation() {
+      return this.$store.state.eventsNearLocation;
     },
   },
-  mounted() {
-    if (this.usersEvents === undefined) {
-      this.$store.dispatch("getUsersEvents", Number(this.userId));
-    }
+  watch: {
+    eventsNearLocation(newValue, oldValue) {
+      newValue, oldValue;
+    },
+  },
+  methods: {
+    notifyParent() {
+      this.$emit("toggleEventsNearLocationView", undefined);
+    },
   },
 };
 </script>
 
 <style scoped>
-.eventContainerParent h3:nth-child(1) {
+#pgCtr {
+  display: grid;
+}
+#pgCtr h3:nth-child(1) {
   place-self: center;
   margin-top: 40px;
   width: 80%;
   text-align: center;
+}
+.eventContainerParent {
+  height: auto;
 }
 </style>

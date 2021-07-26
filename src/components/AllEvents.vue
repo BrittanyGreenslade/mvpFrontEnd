@@ -16,8 +16,9 @@
           <div class="genGrid">
             <p class="bold">{{ event.dateTime }}</p>
             <h3>{{ event.eventName }}</h3>
-            <p>{{ event.hostName }}</p>
-            <!-- add number of people attending maybe? -->
+            <p>
+              <b><u>Host:</u></b> {{ event.hostName }}
+            </p>
             <p>{{ event.cityName }}, {{ event.countryName }}</p>
             <router-link :to="`/event/${event.eventId}`"
               >View Event</router-link
@@ -25,9 +26,6 @@
           </div>
           <img :src="`${event.eventImageUrl}`" alt="event image" />
         </div>
-        <!-- <attend-event :eventId="event.eventId" />
-      <delete-event :eventId="event.eventId" :hostId="event.hostId" /> -->
-        <!-- v-if="currentUserInfo.userId === event.hostId" -->
       </div>
     </div>
   </div>
@@ -48,8 +46,6 @@ export default {
     },
   },
   mounted() {
-    //do a check to see if allEvents isn't undefined?
-    //change id to the prop here when there is one
     if (this.allEvents === undefined) {
       this.$store.dispatch("getAllEvents");
     }

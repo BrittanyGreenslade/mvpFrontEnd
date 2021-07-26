@@ -34,6 +34,7 @@ export default {
     };
   },
   methods: {
+    //this notifies the signup form, the edit profile form, and to the home view
     notifyParent() {
       this.$emit("getLocationInfo", this.searchCity);
     },
@@ -69,7 +70,7 @@ export default {
           },
         })
         .then((res) => {
-          //just to show a list of city IDs locally based on the first 3 letters user typed
+          //just to show a list of city IDs locally based on the first 3+ letters user typed
           this.potentialUserCities = res.data;
         })
         .catch((err) => {

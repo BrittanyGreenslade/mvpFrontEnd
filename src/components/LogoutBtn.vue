@@ -27,11 +27,6 @@ export default {
     navigateToLogin() {
       this.$router.push({ path: "/login" });
     },
-    // logout(loginToken) {
-    //   this.$store.dispatch("logout", loginToken);
-    //   this.navigateToLogin();
-
-    // },
     logout() {
       axios
         .request({

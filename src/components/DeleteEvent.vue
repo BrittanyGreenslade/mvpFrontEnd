@@ -30,19 +30,11 @@ export default {
     },
   },
   mounted() {
-    //do a check to see if allUsers isn't undefined?
     if (this.$store.state.allEvents === undefined) {
       this.$store.dispatch("getAllEvents");
     }
   },
   methods: {
-    // spliceEvent(allEvents) {
-    //   for (let i = 0; i < allEvents.length; i++) {
-    //     if (allEvents[i].eventId === this.eventId) {
-    //       allEvents.splice(i, 1);
-    //     }
-    //   }
-    // },
     deleteEvent() {
       axios
         .request({
@@ -57,7 +49,7 @@ export default {
         .then((res) => {
           // this.navigateToSignup();
           for (let i = 0; i < this.allEvents.length; i++) {
-            if (this.allEvents[i].userId === this.eventId) {
+            if (this.allEvents[i].eventId === this.eventId) {
               this.$store.commit("deleteEvent", i);
             }
           }
@@ -69,8 +61,6 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          console.log(this.eventId);
-          console.log(this.loginToken);
         });
     },
   },
