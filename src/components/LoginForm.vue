@@ -94,4 +94,7 @@ h2 {
 .userForm {
   grid-template-rows: 1fr 1fr 0.5fr;
 }
+.landingNav {
+  font-size: 16px;
+}
 </style>

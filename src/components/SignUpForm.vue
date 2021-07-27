@@ -124,6 +124,9 @@ export default {
 </script>
 
 <style scoped>
+.titleContainer {
+  margin-bottom: 0;
+}
 .userForm {
   row-gap: 10px;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 2fr;
@@ -154,5 +157,8 @@ h2 {
   /* border: 1px solid grey; */
   margin-top: 10px;
   text-justify: center;
+}
+.landingNav {
+  font-size: 16px;
 }
 </style>

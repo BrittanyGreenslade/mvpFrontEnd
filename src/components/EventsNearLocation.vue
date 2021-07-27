@@ -18,9 +18,11 @@
               >
               <p>
                 Host:
-                <router-link :to="`/profile/${event.hostId}`">{{
-                  event.hostName
-                }}</router-link>
+                <router-link
+                  class="hostLink"
+                  :to="`/profile/${event.hostId}`"
+                  >{{ event.hostName }}</router-link
+                >
               </p>
               <p class="locationName">
                 {{ event.cityName }}, {{ event.countryName }}

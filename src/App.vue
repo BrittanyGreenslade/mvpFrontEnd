@@ -246,6 +246,10 @@ textarea {
   margin-left: 10px;
   margin-top: 10px;
 }
+.hostLink {
+  font-weight: normal;
+  font-size: 14px;
+}
 #pageCtr {
   display: grid;
   place-items: center;
