@@ -20,7 +20,7 @@
             >
 
             <p>
-              <b>Host:</b>
+              Host:
               <router-link :to="`/profile/${event.hostId}`">{{
                 event.hostName
               }}</router-link>
