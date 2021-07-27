@@ -4,8 +4,7 @@
     <input
       autocomplete="off"
       type="text"
-      placeholder="first 3 letters of your city"
-      required
+      placeholder="first 3 letters of city"
       class="landingInput"
       id="cityName"
       @keyup="checkLength"
@@ -33,6 +32,14 @@ export default {
       searchCity: undefined,
     };
   },
+  computed: {
+    currentUserCity() {
+      return this.$store.getters.currentUserCity;
+    },
+    routePath() {
+      return this.$route.path;
+    },
+  },
   methods: {
     //this notifies the signup form, the edit profile form, and to the home view
     notifyParent() {
@@ -51,12 +58,15 @@ export default {
       //and as param in 'getUserCity' fn below
     },
     checkLength() {
+      if (document.getElementById("cityName").value.length < 1) {
+        document.getElementById("cityList").style.display = "none";
+      }
       //checks len of the city input to make api call when length is 3 characters or more
       if (document.getElementById("cityName").value.length >= 3) {
         this.getCities();
         document.getElementById("cityList").style.display = "grid";
         document.getElementById("cityList").style.position = "absolute";
-        document.getElementById("cityList").style.border = "1px solid black";
+        document.getElementById("cityList").style.border = "1px solid #be9759";
       }
     },
     getCities() {
@@ -70,7 +80,7 @@ export default {
           },
         })
         .then((res) => {
-          //just to show a list of city IDs locally based on the first 3+ letters user typed
+          //just to show a list of city IDs in local data based on the first 3+ letters user typed
           this.potentialUserCities = res.data;
         })
         .catch((err) => {
@@ -87,18 +97,21 @@ export default {
   width: 100%;
   place-items: center;
 }
+#cityName {
+  background: none;
+}
 #userCityInputForm {
   width: auto;
 }
 #userCityInput {
   width: 80%;
 }
-#citySearchCtr {
+/* #citySearchCtr {
   width: 100%;
-}
+} */
 #cityList {
-  background: white;
+  background: #0d1116;
   width: 80%;
-  /* border: 1px solid black; */
+  /* border: 2px solid yellow; */
 }
 </style>

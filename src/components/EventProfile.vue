@@ -3,16 +3,22 @@
     <router-link id="backBtn" to="/home">Back</router-link>
     <div class="eventContainerChild">
       <img class="eventImg" :src="`${event.eventImageUrl}`" alt="event image" />
-      <h3>Host: {{ event.hostName }}</h3>
+      <h3>
+        Host:
+        <router-link :to="`/profile/${event.hostId}`">{{
+          event.hostName
+        }}</router-link>
+      </h3>
     </div>
     <!-- <img :src="`${event.hostImageUrl}`" alt="event host image" /> -->
     <div id="eventCtr">
       <h1>{{ event.eventName }}</h1>
       <div id="eventInfoCtr">
         <h3>{{ eventDate }}</h3>
-        <p>{{ eventTime }} (UTC)</p>
-        <h2>{{ event.cityName }}, {{ event.countryName }}</h2>
-
+        <p id="date">{{ eventTime }} (UTC)</p>
+        <h4>
+          <i>{{ event.cityName }}, {{ event.countryName }}</i>
+        </h4>
         <event-attendees />
         <!-- <h3>(Number attending)</h3> -->
       </div>
@@ -119,14 +125,23 @@ export default {
 </script>
 
 <style scoped>
+#date {
+  font-size: 14px;
+}
+
 #compCtr {
   height: 100%;
   width: 80%;
   justify-self: center;
   margin-top: 30px;
 }
+h1 {
+  font-weight: 900;
+  color: #be9759;
+  /* text-shadow: 2px 2px #be9759; */
+}
 .eventImg {
-  width: 150px;
+  width: 100px;
 }
 .eventContainerChild {
   place-items: center;
@@ -149,10 +164,10 @@ export default {
 }
 #eventCtr {
   display: grid;
-  min-height: 50%;
+  height: 75%;
   margin-bottom: 30px;
   display: grid;
-  grid-template-rows: 0.5fr 1fr 0.5fr 2.5fr;
+  grid-template-rows: 0.5fr 1fr 0.5fr 3fr 0.5fr;
 }
 #eventCtr > h1 {
   align-self: end;
@@ -163,6 +178,9 @@ export default {
 .componentCtr {
   height: 70%;
   min-height: 60%;
+}
+.btnContainer {
+  align-self: end;
 }
 .genGrid {
   height: 40%;

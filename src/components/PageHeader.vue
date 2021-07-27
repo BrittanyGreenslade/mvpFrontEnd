@@ -1,6 +1,12 @@
 <template>
   <div id="headerCtr" v-if="loginToken">
-    <router-link to="/home"><h1>COOL APP NAME</h1></router-link>
+    <router-link id="homeLink" to="/home">
+      <img
+        id="headerImg"
+        src="../assets/websiteNameLogoHeader.jpg"
+        alt="web developmeet in vs code styling"
+      />
+    </router-link>
     <router-link :to="`/profile/${currentUserInfo.userId}`"
       ><img
         class="profileImg"
@@ -13,9 +19,7 @@
 <script>
 export default {
   name: "page-header",
-  components: {
-    // LogoutBtn,
-  },
+  components: {},
 
   computed: {
     loginToken() {
@@ -34,11 +38,19 @@ export default {
   place-items: center;
   margin-top: 10px;
   border-bottom: 1px solid grey;
-  height: 10vh;
+  height: 12vh;
   align-self: start;
 }
 .profileImg {
   border-radius: 50px;
   width: 40px;
+}
+#homeLink {
+  display: grid;
+  justify-self: end;
+  min-width: 80%;
+}
+#headerImg {
+  height: 90%;
 }
 </style>

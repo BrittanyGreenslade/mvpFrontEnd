@@ -1,6 +1,8 @@
 <template>
   <div>
-    <p @click="attendeeListView = true">Attending: {{ attendees.length }}</p>
+    <p id="attending" @click="attendeeListView = true">
+      Attending: {{ attendees.length }}
+    </p>
     <div id="listContainer" v-if="attendeeListView === true">
       <img
         @click="attendeeListView = false"
@@ -8,18 +10,20 @@
         src="../assets/close.svg"
         alt="close button"
       />
-      <div
-        class="eventContainerChild"
-        v-for="attendee in attendees"
-        :key="attendee.userId"
-      >
-        <img :src="`${attendee.imageUrl}`" alt="attendee's profile picture" />
-        <router-link
-          id="link to attendee's profile"
-          :to="`/profile/${attendee.userId}`"
+      <div class="attendeesContainer">
+        <div
+          class="eventContainerChild"
+          v-for="attendee in attendees"
+          :key="attendee.userId"
         >
-          <h3>{{ attendee.name }}</h3>
-        </router-link>
+          <img :src="`${attendee.imageUrl}`" alt="attendee's profile picture" />
+          <router-link
+            id="link to attendee's profile"
+            :to="`/profile/${attendee.userId}`"
+          >
+            <h3>{{ attendee.name }}</h3>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -68,22 +72,37 @@ export default {
 </script>
 
 <style scoped>
-p {
-  font-size: 18px;
-  font-weight: bold;
-  color: blue;
+a {
+  align-self: center;
+}
+.eventContainerChild img:nth-child(1) {
+  border-radius: 50%;
+  width: 70px;
 }
 .eventContainerChild {
+  height: 100px;
+  margin-left: 5%;
   grid-template-columns: 1.5fr 2fr;
   border: 1px solid grey;
+  margin-bottom: 10px;
 }
 .actionIcon {
   justify-self: end;
   margin-right: 15px;
   margin-bottom: 20px;
 }
+#attending {
+  color: #ffff00;
+  text-decoration: none;
+  font-weight: bold;
+}
+.attendeesContainer {
+  justify-self: center;
+  width: 90%;
+}
 #listContainer {
   display: grid;
+  grid-auto-rows: 80px auto;
   top: 100px;
   height: 80%;
   width: 80%;
@@ -91,6 +110,7 @@ p {
   overflow: scroll;
   position: absolute;
   background: white;
+  background: #0d1116;
   border: 2px solid grey;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="cmptHeader">
-      <h1>Browse Events</h1>
-      <button>
+      <h1>All Events</h1>
+      <button class="btn">
         <router-link to="/createEvent">Create Event</router-link>
       </button>
     </div>
@@ -14,15 +14,20 @@
       >
         <div class="eventContainerChild">
           <div class="genGrid">
-            <p class="bold">{{ event.dateTime }}</p>
-            <h3>{{ event.eventName }}</h3>
-            <p>
-              <b><u>Host:</u></b> {{ event.hostName }}
-            </p>
-            <p>{{ event.cityName }}, {{ event.countryName }}</p>
-            <router-link :to="`/event/${event.eventId}`"
-              >View Event</router-link
+            <p>{{ event.dateTime }}</p>
+            <router-link class="eventName" :to="`/event/${event.eventId}`">
+              <h3>{{ event.eventName }}</h3></router-link
             >
+
+            <p>
+              <b>Host:</b>
+              <router-link :to="`/profile/${event.hostId}`">{{
+                event.hostName
+              }}</router-link>
+            </p>
+            <p class="locationName">
+              {{ event.cityName }}, {{ event.countryName }}
+            </p>
           </div>
           <img :src="`${event.eventImageUrl}`" alt="event image" />
         </div>
@@ -32,10 +37,7 @@
 </template>
 
 <script>
-// import AttendEvent from "./AttendEvent.vue";
-// import DeleteEvent from "./DeleteEvent.vue";
 export default {
-  // components: { AttendEvent, DeleteEvent },
   name: "all-events",
   computed: {
     allEvents() {
@@ -54,6 +56,9 @@ export default {
 </script>
 
 <style scoped>
+.genGrid p:nth-child(1) {
+  font-size: 14px;
+}
 .cmptHeader {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -64,5 +69,13 @@ export default {
 .cmptHeader > h1 {
   place-self: start;
   margin-left: 10px;
+}
+#imgEventCtr {
+  display: grid;
+  place-self: center;
+}
+#imgEventCtr img:nth-child(1) {
+  width: 75px;
+  place-self: center;
 }
 </style>

@@ -5,6 +5,7 @@
       <p id="distanceKm">
         Events within
         <input
+          autocomplete="off"
           type="text"
           placeholder="distance (km)"
           list="radiusList"
@@ -18,9 +19,19 @@
         km of <b>{{ searchCity.cityName }}, {{ searchCity.countryName }}</b>
       </p>
     </div>
-    <button class="btn" @click="withinDistance(searchCity.locationId)">
-      search cities
-    </button>
+    <div class="btnContainer">
+      <img
+        @click="notifyParent"
+        class="actionIcon"
+        src="../assets/close.svg"
+        alt="cancel city search"
+      />
+      <button class="btn" @click="withinDistance(searchCity.locationId)">
+        <p>
+          search cities
+        </p>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -30,6 +41,12 @@ export default {
   name: "get-radius",
   props: {
     searchCity: Object,
+  },
+  data() {
+    return {
+      counter: 0,
+      events: [],
+    };
   },
 
   computed: {
@@ -41,8 +58,14 @@ export default {
     },
   },
   methods: {
+    //this notifies the parent(home) then triggers the mutation in the store
+    //to cancel the view of search cities list
+    notifyParent() {
+      this.$emit("toggleSearchCity");
+    },
     //chooses cities within distance chosen in input dropdown (25, 50, 100)
     withinDistance(locationId) {
+      this.counter = 0;
       axios
         .request({
           url: `${process.env.VUE_APP_API_URL}/distance`,
@@ -56,8 +79,7 @@ export default {
         })
         .then((res) => {
           for (let i = 0; i < res.data.length; i++) {
-            this.$store.dispatch("getEventsAtLocation", res.data[i].cityId);
-            continue;
+            this.getEventsAtLocation(res.data[i].cityId, res.data.length);
           }
           document.getElementById("radius").style.display = "none";
         })
@@ -65,8 +87,41 @@ export default {
           console.log(err);
         });
     },
+
+    getEventsAtLocation(cityId, numCities) {
+      axios
+        .request({
+          url: `${process.env.VUE_APP_API_URL}/events/location`,
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          params: {
+            locationId: cityId,
+          },
+        })
+        .then((res) => {
+          for (let i = 0; i < res.data.length; i++) {
+            this.events.push(res.data[i]);
+          }
+          this.counter += 1;
+          if (this.counter === numCities) {
+            this.$store.commit("updateEventsNearLocation", this.events);
+          }
+        })
+        .catch((err) => {
+          this.counter += 1;
+          //if last api call fails, store won't be updated
+          if (this.counter === numCities) {
+            this.$store.commit("updateEventsNearLocation", this.events);
+          }
+          console.log(err);
+        });
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  width: 90px;
+}
+</style>

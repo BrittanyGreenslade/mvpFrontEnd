@@ -1,17 +1,26 @@
 <template>
-  <div id="pgCtr">
-    <h1>Maybe scrolly pics</h1>
-    <search-city @getLocationInfo="handleChildUpdate" id="searchBar" />
+  <div class="pgCtr">
+    <img
+      id="heroPic"
+      src="../assets/heroPic.jpg"
+      alt="interconnected earth with binary numbers"
+    />
+    <search-city
+      v-if="eventsNearLocation === undefined"
+      @getLocationInfo="handleChildUpdate"
+      id="searchBar"
+    />
     <get-radius
+      @toggleSearchCity="handleRadiusUpdate"
       id="radius"
       v-if="searchCity !== undefined"
       :searchCity="searchCity"
     />
     <all-events v-if="eventsNearLocation === undefined" />
-    <events-near-location
-      v-else
-      @toggleEventsNearLocationView="handleEventsChildUpdate"
-    />
+    <div v-else>
+      <p class="backBtn" @click="eventsNearLocationToggle">Home</p>
+      <events-near-location />
+    </div>
   </div>
 </template>
 
@@ -39,10 +48,18 @@ export default {
     GetRadius,
   },
   methods: {
-    handleEventsChildUpdate() {
-      this.$store.commit("eventsNearLocationUndef", undefined);
+    handleRadiusUpdate() {
+      this.searchCity = undefined;
+      //toggles view of list
+      this.$store.commit("eventsNearLocationTog", undefined);
       document.getElementById("cityName").value = "";
     },
+    //changes view of the page to have all cities or cities searched
+    eventsNearLocationToggle() {
+      this.$store.commit("eventsNearLocationTog", undefined);
+      this.searchCity = undefined;
+    },
+    //gets the search city from the search bar component
     handleChildUpdate(data) {
       this.searchCity = data;
     },
@@ -51,19 +68,20 @@ export default {
 </script>
 
 <style scoped>
-#pgCtr {
-  grid-template-rows: 1fr 0.5fr 70%;
+.pgCtr {
+  overflow: scroll;
+  grid-template-rows: 300px 120px minmax(50%, 100%);
   margin-bottom: 20px;
 }
-#searchBar {
-  align-self: end;
-  width: 80%;
+.backBtn {
+  margin: 30px 0 5px 30px;
+  /* margin-left: 30px;
+  margin-top: 30px; */
+}
+#heroPic {
+  width: 100%;
+  height: 100%;
   place-self: center;
-  border-radius: 10px;
-  padding: 10px;
-  padding-bottom: 20px;
-  height: 20px;
-  border: 1px solid grey;
 }
 #radius {
   border: 1px solid black;
@@ -74,7 +92,6 @@ export default {
   top: 43.5%;
   height: 75px;
   display: grid;
-
   padding: 10px;
 }
 </style>

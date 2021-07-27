@@ -49,7 +49,9 @@
       />
       <search-city @getLocationInfo="handleChildUpdate" />
       <button @click="userSignup" class="btn">
-        register
+        <p>
+          register
+        </p>
       </button>
     </form>
     <h3 class="landingNav">
@@ -75,7 +77,6 @@ export default {
   },
   data() {
     return {
-      potentialUserCities: [],
       searchCity: undefined,
     };
   },

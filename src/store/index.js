@@ -40,6 +40,15 @@ export default new Vuex.Store({
         state.usersEvents.push(data);
       }
     },
+    userCreateEvent(state, data) {
+      if (state.allEvents === undefined) {
+        let events = [];
+        events.push(data);
+        state.allEvents = events;
+      } else {
+        state.allEvents.push(data);
+      }
+    },
     deleteUser(state, data) {
       state.allUsers.splice(data, 1);
     },
@@ -49,36 +58,11 @@ export default new Vuex.Store({
     deleteUserEvent(state, data) {
       state.usersEvents.splice(data, 1);
     },
-    eventsNearLocationUndef(state, data) {
+    eventsNearLocationTog(state, data) {
       state.eventsNearLocation = data;
     },
-
     updateEventsNearLocation(state, data) {
-      if (state.eventsNearLocation === undefined) {
-        let events = [];
-        events.push(data);
-        console.log(events);
-        console.log(data);
-        for (let i = 0; i < events.length; i++) {
-          console.log(events.length);
-          //   if (Number(events[i].eventId) === Number(data.eventId)) {
-          //     console.log(events[i]);
-          //     events.splice(i, 1);
-          console.log(events[i]);
-          continue;
-          //     continue;
-        }
-        // }
-        state.eventsNearLocation = events;
-        // console.log(events);
-      } else {
-        for (let i = 0; i < state.eventsNearLocation.length; i++) {
-          if (state.eventsNearLocation[i].eventId !== Number(data.eventId)) {
-            state.eventsNearLocation.push(data);
-            continue;
-          }
-        }
-      }
+      state.eventsNearLocation = data;
     },
     createEvent(state, data) {
       if (state.usersEvents == undefined) {
@@ -119,30 +103,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    getEventsAtLocation(context, cityId) {
-      axios
-        .request({
-          url: `${process.env.VUE_APP_API_URL}/events/location`,
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          params: {
-            locationId: cityId,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          let event = {};
-          if (res.data.length >= 0) {
-            for (let i = 0; i < res.data.length; i++) {
-              event = res.data[i];
-            }
-            context.commit("updateEventsNearLocation", event);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+
     getUsersEvents(context, userId) {
       axios
         .request({
@@ -162,6 +123,14 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    currentUserCity(state) {
+      let city = {
+        cityName: state.currentUserInfo.cityName,
+        countryName: state.currentUserInfo.countryName,
+        cityId: state.currentUserInfo.locationId,
+      };
+      return city;
+    },
     usersFutureEvents(state) {
       let futureEvents = [];
       if (state.usersEvents === undefined) {

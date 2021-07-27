@@ -1,7 +1,7 @@
 <template>
   <div class="genGrid">
     <div class="eventContainerParent">
-      <h3 v-if="usersPastEvents.length === 0">
+      <h3 class="notifyNoEvents" v-if="usersPastEvents.length === 0">
         This user has not attended any events
       </h3>
       <div
@@ -12,13 +12,18 @@
         <div class="eventContainerChild">
           <div class="genGrid">
             <p class="bold">{{ event.dateTime }}</p>
-            <h3>{{ event.eventName }}</h3>
-            <p>{{ event.hostName }}</p>
-            <!-- add number of people attending maybe? -->
-            <p>{{ event.cityName }}, {{ event.countryName }}</p>
-            <router-link :to="`/event/${event.eventId}`"
-              >View Event</router-link
+            <router-link :to="`/event/${event.eventId}`">
+              <h3 class="eventName">{{ event.eventName }}</h3></router-link
             >
+            <p>
+              <b>Host: </b>
+              <router-link :to="`/event/${event.hostId}`">{{
+                event.hostName
+              }}</router-link>
+            </p>
+            <p class="locationName">
+              {{ event.cityName }}, {{ event.countryName }}
+            </p>
           </div>
           <img :src="`${event.eventImageUrl}`" alt="event image" />
         </div>
@@ -49,11 +54,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.eventContainerParent h3:nth-child(1) {
-  place-self: center;
-  margin-top: 40px;
-  width: 80%;
-  text-align: center;
-}
-</style>
+<style scoped></style>

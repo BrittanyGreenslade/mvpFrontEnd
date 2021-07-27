@@ -3,38 +3,47 @@
     <div>
       <router-link :to="`/profile/${currentUserInfo.userId}`">Back</router-link>
       <div class="titleContainer">
-        <h1 class="landingTitle">Edit Your</h1>
+        <h1 class="landingTitle">Edit</h1>
         <h1 class="landingTitle">Profile</h1>
       </div>
-      <form class="formStyling" action="javascript:void(0)">
-        <input class="otherInput" type="text" id="name" placeholder="name" />
-        <input class="otherInput" type="text" id="email" placeholder="email" />
+      <form autocomplete="off" class="formStyling" action="javascript:void(0)">
+        <input class="landingInput" type="text" id="name" placeholder="name" />
         <input
-          class="otherInput"
+          class="landingInput"
+          type="text"
+          id="email"
+          placeholder="email"
+        />
+        <input
+          class="landingInput"
           type="password"
           id="password"
           placeholder="password"
         />
-        <search-city id="searchBar" @getLocationInfo="handleChildUpdate" />
-        <input
-          class="otherInput"
+        <search-city @getLocationInfo="handleChildUpdate" />
+        <textarea
+          class="landingInput"
           type="text"
           id="bio"
           placeholder="bio max length 300 characters"
         />
         <input
-          class="otherInput"
+          class="landingInput"
           type="text"
           id="imgUrl"
-          placeholder="link to profile img"
+          placeholder="profile image URL"
         />
         <input
-          class="otherInput"
+          class="landingInput"
           type="text"
           id="linkedInUrl"
           placeholder="LinkedIn url"
         />
-        <button class="btn" @click="editProfile" id="editBtn">edit</button>
+        <button class="btn" @click="editProfile()" id="editBtn">
+          <p>
+            edit
+          </p>
+        </button>
       </form>
     </div>
     <delete-profile id="deleteComp" />
@@ -55,6 +64,9 @@ export default {
     };
   },
   computed: {
+    currentUserCity() {
+      return this.$store.getters.currentUserCity;
+    },
     loginToken() {
       return this.$store.state.loginToken;
     },
@@ -67,6 +79,10 @@ export default {
       this.searchCity = data;
     },
     editProfile() {
+      //this is in case the user doesn't change their location info
+      if (this.searchCity === undefined) {
+        this.searchCity = this.currentUserCity;
+      }
       axios
         .request({
           url: `${process.env.VUE_APP_API_URL}/users`,
@@ -85,7 +101,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
           cookies.set("currentUserInfo", res.data);
           this.$store.commit("updateCurrentUserInfo", res.data);
           this.$router.push({
@@ -104,14 +119,27 @@ export default {
 #searchBar {
   width: 93%;
 }
+.titleContainer,
+#deleteComp {
+  margin-top: 40px;
+}
 #pageCtr {
   justify-self: center;
   margin-top: 20px;
+  align-self: start;
 }
 #pageCtr div:nth-child(1),
 #deleteComp {
   width: 90%;
 }
+#cityName {
+  border: none;
+  height: 30px;
+  width: 100%;
+  border-bottom: 1px solid grey;
+  justify-content: end;
+}
+
 .formStyling {
   width: 100%;
 }

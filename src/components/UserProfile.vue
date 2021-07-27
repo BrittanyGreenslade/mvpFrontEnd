@@ -2,7 +2,7 @@
   <div>
     <div class="genGrid">
       <div id="navCtr">
-        <router-link to="/home"
+        <router-link id="xBtn" to="/home"
           ><img
             class="actionIcon"
             src="../assets/close.svg"
@@ -84,7 +84,7 @@ export default {
     //need this for when currentUser updates their profile and it doesn't do a
     //call to get user info.
     this.checkUser();
-    document.getElementById("going").style.color = "blue";
+    document.getElementById("going").style.color = "#FFFF00";
     //will change value of getters once this is dispatched
     if (this.usersEvents === undefined) {
       this.$store.dispatch("getUsersEvents", this.userId);
@@ -117,15 +117,15 @@ export default {
       if (this.pastEventsView === true) {
         this.pastEventsView = false;
       }
-      document.getElementById("going").style.color = "blue";
-      document.getElementById("past").style.color = "black";
+      document.getElementById("going").style.color = "#FFFF00";
+      document.getElementById("past").style.color = "#05b0c7";
     },
     pastEventsViewOn() {
       if (this.pastEventsView === false) {
         this.pastEventsView = true;
       }
-      document.getElementById("going").style.color = "black";
-      document.getElementById("past").style.color = "blue";
+      document.getElementById("going").style.color = "#05b0c7";
+      document.getElementById("past").style.color = "#FFFF00";
     },
     viewUserProfile() {
       axios
@@ -142,7 +142,6 @@ export default {
           for (let i = 0; i < res.data.length; i++) {
             this.userInfo = res.data[i];
           }
-          console.log(res.data);
           res;
         })
         .catch((err) => {
@@ -167,6 +166,7 @@ export default {
   border-radius: 50%;
 }
 #userInfoCtr {
+  margin-top: 20px;
   place-self: center;
   display: grid;
   place-items: center;
@@ -202,5 +202,8 @@ h1 {
 }
 #editIcon > img {
   width: 25px;
+}
+#xBtn {
+  width: 20px;
 }
 </style>

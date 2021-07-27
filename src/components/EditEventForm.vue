@@ -1,47 +1,55 @@
 <template>
   <div id="pageCtr">
     <div>
-      <router-link id="backBtn" to="/home">Back</router-link>
+      <router-link class="backLink" id="backBtn" to="/home">Back</router-link>
       <div class="titleContainer">
         <h1 class="landingTitle">Edit</h1>
         <h1 class="landingTitle">Event</h1>
       </div>
-      <form class="formStyling" action="javascript:void(0)">
+      <form autocomplete="off" class="formStyling" action="javascript:void(0)">
         <input
-          class="otherInput"
+          class="landingInput"
           type="text"
           id="eventName"
           placeholder="event name"
         />
         <input
-          class="otherInput"
+          class="landingInput"
           type="text"
           id="description"
           placeholder="description"
         />
-        <input class="otherInput" type="datetime-local" id="dateTime" />
+        <input class="landingInput" type="datetime-local" id="dateTime" />
         <input
-          class="otherInput"
+          class="landingInput"
           type="password"
           id="eventImageUrl"
           placeholder="event img url"
         />
-        <input
-          class="otherInput"
-          type="text"
-          id="cityName"
-          placeholder="city name"
-        />
-        <button class="btn" @click="editEvent" id="editBtn">edit</button>
+        <search-city @getLocationInfo="handleChildUpdate" />
+        <button class="btn" @click="editEvent" id="editBtn">
+          <p>
+            edit
+          </p>
+        </button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import SearchCity from "./SearchCity.vue";
 import axios from "axios";
 export default {
   name: "edit-event",
+  components: {
+    SearchCity,
+  },
+  data() {
+    return {
+      searchCity: undefined,
+    };
+  },
   computed: {
     eventId() {
       return this.$route.params.eventId;
@@ -54,6 +62,9 @@ export default {
     },
   },
   methods: {
+    handleChildUpdate(data) {
+      this.searchCity = data;
+    },
     editEvent() {
       axios
         .request({
@@ -88,14 +99,15 @@ export default {
 </script>
 
 <style scoped>
-/* .genGrid {
-  justify-items: center;
-} */
+.titleContainer {
+  margin-top: 40px;
+}
 #pageCtr {
   height: 70%;
   justify-self: center;
   margin-top: 50px;
   justify-items: center;
+  align-self: start;
 }
 #pageCtr div:nth-child(1) {
   height: auto;

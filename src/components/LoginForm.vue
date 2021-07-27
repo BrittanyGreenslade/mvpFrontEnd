@@ -24,7 +24,11 @@
         placeholder="password (min length 8)"
         required
       />
-      <button @click="login" class="btn">login</button>
+      <button @click="login" class="btn">
+        <p>
+          login
+        </p>
+      </button>
     </form>
     <h3 class="landingNav">
       New here? <router-link to="/signup">Register</router-link>

@@ -1,7 +1,9 @@
 <template>
   <div class="genGrid">
     <button class="btn" @click="logout(loginToken)" id="logoutBtn">
-      logout
+      <p>
+        logout
+      </p>
     </button>
   </div>
 </template>
@@ -17,9 +19,6 @@ export default {
     },
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
-    },
-    routePath() {
-      return this.$route.path;
     },
   },
 

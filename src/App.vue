@@ -17,7 +17,6 @@
   </div>
 </template>
 <script>
-// import cookies from "vue-cookies";
 import PageHeader from "./components/PageHeader.vue";
 import PageFooter from "./components/PageFooter.vue";
 export default {
@@ -32,17 +31,19 @@ export default {
     userId() {
       return this.$route.params.userId;
     },
+    currentUserInfo() {
+      return this.$store.state.currentUserInfo;
+    },
   },
   watch: {
+    currentUserInfo(newValue, oldValue) {
+      newValue, oldValue;
+    },
     //routes to home when link path is just /
     routePath(newValue, oldValue) {
       if (this.loginToken && newValue === "/") {
         this.$router.push({ path: `/home` });
       }
-
-      // else if (newValue === "/login") {
-      //   this.$store.dispatch("logout", this.loginToken);
-      // }
       oldValue;
     },
   },
@@ -63,6 +64,7 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap");
 /* styling for all things in app */
 * {
   padding: 0;
@@ -75,6 +77,21 @@ export default {
   display: grid;
   place-items: center;
   align-items: start;
+}
+a,
+.backBtn {
+  color: #ffff00;
+  text-decoration: none;
+  font-weight: bold;
+}
+.locationName {
+  font-size: 13px;
+  font-style: italic;
+}
+body {
+  color: #05b0c7;
+  font-family: "Roboto Mono", monospace;
+  background: #151a20;
 }
 /* all divs in app take up 100% */
 #app > section > div {
@@ -93,14 +110,22 @@ export default {
   min-height: 60vh;
 }
 .btn {
-  width: 35%;
-  height: 25px;
-  border-radius: 10px;
-  background: grey;
+  width: 100px;
+  height: 28px;
+  border-radius: 5px;
+  background: #222a35;
   border: none;
+  box-shadow: 2px 2px #0d1116;
   display: grid;
   place-items: center;
   place-self: end;
+}
+.btn a,
+.btn p {
+  color: #bc4959;
+  font-weight: 400;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #bc4959;
 }
 .btnContainer {
   display: grid;
@@ -115,11 +140,22 @@ export default {
   width: 70%;
   height: 80%;
 }
+/* changes colour of calendar icon on calendar input */
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+.notifyNoEvents {
+  width: 80%;
+  place-self: center;
+  text-align: center;
+}
 .landingInput {
+  background: none;
   border: none;
   height: 30px;
   width: 100%;
   border-bottom: 1px solid grey;
+  color: grey;
   justify-content: end;
 }
 .landingTitle {
@@ -138,7 +174,9 @@ textarea {
   width: 93%;
   border: 1px solid grey;
 }
-
+.eventName {
+  color: #be9759;
+}
 #searchBar {
   align-self: end;
   width: 80%;
@@ -146,6 +184,7 @@ textarea {
   border-radius: 10px;
   padding: 10px;
   padding-bottom: 20px;
+  margin-top: 15px;
   height: 20px;
   border: 1px solid grey;
 }
@@ -174,20 +213,23 @@ textarea {
   display: grid;
   row-gap: 15px;
   margin-top: 15px;
-  height: 80%;
+  min-height: 80%;
+  overflow: scroll;
 }
 .eventContainer {
+  display: grid;
   width: 90%;
-  border: 2px solid black;
+  border: 2px solid #9e49cf;
   border-radius: 15px;
-  box-shadow: 2px 4px lightgrey;
   place-self: center;
 }
 
 .eventContainerChild {
   display: grid;
   grid-auto-flow: column;
-  padding: 5px;
+  padding: 8px;
+  width: 90%;
+  place-self: center;
 }
 .eventContainerChild > img {
   place-self: center;

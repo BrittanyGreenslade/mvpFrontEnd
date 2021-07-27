@@ -5,7 +5,9 @@
       v-if="this.currentUserInfo.userId === this.hostId"
       @click="deleteEvent"
     >
-      delete event
+      <p>
+        delete event
+      </p>
     </button>
   </div>
 </template>

@@ -1,28 +1,33 @@
 <template>
-  <div id="pgCtr">
+  <div id="thisPgCtr">
     <h3 v-if="eventsNearLocation.length === 0">
       No events listed at this location
     </h3>
-    <p @click="notifyParent">Home</p>
-    <div class="eventContainerParent">
-      <div
-        class="eventContainer"
-        v-for="event in eventsNearLocation"
-        :key="event.eventId"
-      >
-        <div class="eventContainerChild">
-          <div class="genGrid">
-            <p class="bold">{{ event.dateTime }}</p>
-            <h3>{{ event.eventName }}</h3>
-            <p>
-              <b><u>Host:</u></b> {{ event.hostName }}
-            </p>
-            <p>{{ event.cityName }}, {{ event.countryName }}</p>
-            <router-link :to="`/event/${event.eventId}`"
-              >View Event</router-link
-            >
+    <div>
+      <div class="eventContainerParent">
+        <div
+          class="eventContainer"
+          v-for="event in eventsNearLocation"
+          :key="event.eventId"
+        >
+          <div class="eventContainerChild">
+            <div class="genGrid">
+              <p>{{ event.dateTime }}</p>
+              <router-link :to="`/event/${event.eventId}`">
+                <h3 class="eventName">{{ event.eventName }}</h3></router-link
+              >
+              <p>
+                <b>Host: </b>
+                <router-link :to="`/profile/${event.hostId}`">{{
+                  event.hostName
+                }}</router-link>
+              </p>
+              <p class="locationName">
+                {{ event.cityName }}, {{ event.countryName }}
+              </p>
+            </div>
+            <img :src="`${event.eventImageUrl}`" alt="event image" />
           </div>
-          <img :src="`${event.eventImageUrl}`" alt="event image" />
         </div>
       </div>
     </div>
@@ -45,25 +50,19 @@ export default {
       newValue, oldValue;
     },
   },
-  methods: {
-    notifyParent() {
-      this.$emit("toggleEventsNearLocationView", undefined);
-    },
-  },
 };
 </script>
 
 <style scoped>
-#pgCtr {
+.genGrid p:nth-child(1) {
+  font-size: 14px;
+}
+.pgCtr {
+  overflow: scroll;
+  grid-auto-flow: row;
+  margin-bottom: 20px;
+}
+#thisPgCtr {
   display: grid;
-}
-#pgCtr h3:nth-child(1) {
-  place-self: center;
-  margin-top: 40px;
-  width: 80%;
-  text-align: center;
-}
-.eventContainerParent {
-  height: auto;
 }
 </style>

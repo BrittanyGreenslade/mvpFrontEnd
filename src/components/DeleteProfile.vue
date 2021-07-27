@@ -2,16 +2,20 @@
   <div>
     <form class="formStyling" action="javascript:void(0)">
       <div class="titleContainer">
-        <h1 class="landingTitle">Delete Your</h1>
+        <h1 class="landingTitle">Delete</h1>
         <h1 class="landingTitle">Account</h1>
       </div>
       <input
-        class="otherInput"
+        class="landingInput"
         type="password"
         placeholder="password"
         id="deletePW"
       />
-      <button class="btn" @click="deleteUser">Delete account</button>
+      <button class="btn" @click="deleteUser">
+        <p>
+          delete account
+        </p>
+      </button>
     </form>
   </div>
 </template>

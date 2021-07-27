@@ -16,5 +16,6 @@ export default {
   place-items: center;
   width: 100%;
   border-top: 1px solid grey;
+  font-size: 14px;
 }
 </style>
