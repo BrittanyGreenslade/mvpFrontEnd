@@ -53,7 +53,7 @@
       </div>
       <div class="btnContainer">
         <button class="btn">
-          <router-link to="/home"> cancel</router-link>
+          <router-link to="/home">cancel</router-link>
         </button>
         <button class="btn" @click="createEvent">
           <p>

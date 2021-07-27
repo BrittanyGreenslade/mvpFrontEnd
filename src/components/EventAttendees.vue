@@ -10,6 +10,10 @@
         src="../assets/close.svg"
         alt="close button"
       />
+      <div class="titleContainer">
+        <h1 class="landingTitle">Event</h1>
+        <h1 class="landingTitle">Attendees</h1>
+      </div>
       <div class="attendeesContainer">
         <div
           class="eventContainerChild"
@@ -80,11 +84,12 @@ a {
   width: 70px;
 }
 .eventContainerChild {
-  height: 100px;
-  margin-left: 5%;
+  height: 70px;
+  margin-left: 2%;
   grid-template-columns: 1.5fr 2fr;
-  border: 1px solid grey;
+  border-bottom: 1px solid #9e49cf;
   margin-bottom: 10px;
+  padding-bottom: 5%;
 }
 .actionIcon {
   justify-self: end;
@@ -96,13 +101,19 @@ a {
   text-decoration: none;
   font-weight: bold;
 }
+.landingTitle {
+  font-size: 30px;
+}
+.titleContainer {
+  margin-left: 30px;
+}
 .attendeesContainer {
   justify-self: center;
   width: 90%;
 }
 #listContainer {
   display: grid;
-  grid-auto-rows: 80px auto;
+  grid-auto-rows: 80px 100px auto;
   top: 100px;
   height: 80%;
   width: 80%;

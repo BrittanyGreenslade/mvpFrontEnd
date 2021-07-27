@@ -11,13 +11,13 @@
       >
         <div class="eventContainerChild">
           <div class="genGrid">
-            <p class="bold">{{ event.dateTime }}</p>
+            <p class="bold">{{ event.dateTime }} (UTC)</p>
             <router-link :to="`/event/${event.eventId}`">
               <h3 class="eventName">{{ event.eventName }}</h3></router-link
             >
             <p>
               Host:
-              <router-link :to="`/event/${event.hostId}`">{{
+              <router-link :to="`/profile/${event.hostId}`">{{
                 event.hostName
               }}</router-link>
             </p>

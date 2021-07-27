@@ -219,9 +219,13 @@ textarea {
 .eventContainer {
   display: grid;
   width: 90%;
-  border: 2px solid #9e49cf;
-  border-radius: 15px;
+  border-bottom: 1px solid #9e49cf;
+  /* border-radius: 15px; */
   place-self: center;
+}
+
+.eventContainerParent .eventContainer:nth-child(1) {
+  border-top: 1px solid #9e49cf;
 }
 
 .eventContainerChild {
@@ -230,6 +234,7 @@ textarea {
   padding: 8px;
   width: 90%;
   place-self: center;
+  margin-bottom: 10px;
 }
 .eventContainerChild > img {
   place-self: center;

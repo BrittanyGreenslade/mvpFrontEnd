@@ -19,7 +19,7 @@
     <all-events v-if="eventsNearLocation === undefined" />
     <div v-else>
       <p class="backBtn" @click="eventsNearLocationToggle">Home</p>
-      <events-near-location />
+      <events-near-location :eventCity="searchCity" />
     </div>
   </div>
 </template>
@@ -36,6 +36,7 @@ export default {
       searchCity: undefined,
     };
   },
+
   computed: {
     eventsNearLocation() {
       return this.$store.state.eventsNearLocation;
@@ -75,8 +76,6 @@ export default {
 }
 .backBtn {
   margin: 30px 0 5px 30px;
-  /* margin-left: 30px;
-  margin-top: 30px; */
 }
 #heroPic {
   width: 100%;
@@ -84,13 +83,14 @@ export default {
   place-self: center;
 }
 #radius {
-  border: 1px solid black;
-  width: 75%;
-  left: 9%;
-  position: absolute;
-  background: white;
-  top: 43.5%;
-  height: 75px;
+  border: 1px solid #be9759;
+  width: 78%;
+  justify-self: center;
+  /* left: 9%; */
+  position: relative;
+  background: #0d1116;
+  top: -22px;
+  height: 100px;
   display: grid;
   padding: 10px;
 }

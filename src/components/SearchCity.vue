@@ -40,6 +40,7 @@ export default {
       return this.$route.path;
     },
   },
+
   methods: {
     //this notifies the signup form, the edit profile form, and to the home view
     notifyParent() {
@@ -106,12 +107,8 @@ export default {
 #userCityInput {
   width: 80%;
 }
-/* #citySearchCtr {
-  width: 100%;
-} */
 #cityList {
   background: #0d1116;
   width: 80%;
-  /* border: 2px solid yellow; */
 }
 </style>

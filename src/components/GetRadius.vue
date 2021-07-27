@@ -5,13 +5,13 @@
       <p id="distanceKm">
         Events within
         <input
-          autocomplete="off"
           type="text"
           placeholder="distance (km)"
           list="radiusList"
           id="radiusInput"
+          class="landingInput"
         />
-        <datalist id="radiusList">
+        <datalist autocomplete="off" id="radiusList">
           <option value="25"> </option>
           <option value="50"> </option>
           <option value="100"> </option>
@@ -121,7 +121,14 @@ export default {
 </script>
 
 <style scoped>
+#radiusInput {
+  width: 42%;
+}
 .btn {
-  width: 90px;
+  margin-right: 5px;
+}
+.landingInput {
+  border: 1px solid grey;
+  text-align: center;
 }
 </style>

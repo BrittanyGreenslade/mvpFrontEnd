@@ -1,7 +1,7 @@
 <template>
   <div id="thisPgCtr">
-    <h3 v-if="eventsNearLocation.length === 0">
-      No events listed at this location
+    <h3 class="notifyNoEvents" v-if="eventsNearLocation.length === 0">
+      No events listed near this location
     </h3>
     <div>
       <div class="eventContainerParent">
@@ -12,7 +12,7 @@
         >
           <div class="eventContainerChild">
             <div class="genGrid">
-              <p>{{ event.dateTime }}</p>
+              <p>{{ event.dateTime }} (UTC)</p>
               <router-link :to="`/event/${event.eventId}`">
                 <h3 class="eventName">{{ event.eventName }}</h3></router-link
               >
@@ -37,17 +37,15 @@
 <script>
 export default {
   name: "events-near-location",
+  props: {
+    eventCity: Object,
+  },
   computed: {
     currentUserInfo() {
       return this.$store.state.currentUserInfo;
     },
     eventsNearLocation() {
       return this.$store.state.eventsNearLocation;
-    },
-  },
-  watch: {
-    eventsNearLocation(newValue, oldValue) {
-      newValue, oldValue;
     },
   },
 };

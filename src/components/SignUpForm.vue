@@ -1,6 +1,9 @@
 <template>
   <div class="componentCtr">
-    <h2>Cool App Name</h2>
+    <img
+      src="../assets/websiteNameLogoHeader.jpg"
+      alt="web developmeet in vs code styling"
+    />
     <div class="titleContainer">
       <h1 class="landingTitle">Create</h1>
       <h1 class="landingTitle">Account</h1>

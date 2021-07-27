@@ -3,12 +3,16 @@
     <router-link id="backBtn" to="/home">Back</router-link>
     <div class="eventContainerChild">
       <img class="eventImg" :src="`${event.eventImageUrl}`" alt="event image" />
-      <h3>
-        Host:
-        <router-link :to="`/profile/${event.hostId}`">{{
-          event.hostName
-        }}</router-link>
-      </h3>
+      <div id="hostCtr">
+        <h4>
+          Host:
+        </h4>
+        <h4>
+          <router-link :to="`/profile/${event.hostId}`">{{
+            event.hostName
+          }}</router-link>
+        </h4>
+      </div>
     </div>
     <!-- <img :src="`${event.hostImageUrl}`" alt="event host image" /> -->
     <div id="eventCtr">
@@ -125,6 +129,9 @@ export default {
 </script>
 
 <style scoped>
+#hostCtr {
+  display: grid;
+}
 #date {
   font-size: 14px;
 }
@@ -141,11 +148,11 @@ h1 {
   /* text-shadow: 2px 2px #be9759; */
 }
 .eventImg {
-  width: 100px;
+  width: 110px;
 }
 .eventContainerChild {
   place-items: center;
-  height: 15%;
+  height: 10%;
   margin-top: 15px;
 }
 .btn {

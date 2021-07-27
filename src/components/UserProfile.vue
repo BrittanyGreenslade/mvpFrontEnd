@@ -19,7 +19,6 @@
         /></router-link>
       </div>
       <div id="userInfoCtr">
-        <!-- add other user's profile to this page too -->
         <img
           class="profileImg"
           :src="`${userInfo.imageUrl}`"
@@ -28,16 +27,14 @@
         <h1>{{ userInfo.name }}</h1>
         <p id="location">{{ userInfo.cityName }}, {{ userInfo.countryName }}</p>
         <h4>{{ userInfo.email }}</h4>
-        <p>{{ userInfo.linkedInUrl }}</p>
+        <a id="linkedIn" :href="`${userInfo.linkedInUrl}`">{{
+          userInfo.linkedInUrl
+        }}</a>
         <logout-btn
           v-if="Number(userId) === this.currentUserInfo.userId"
           id="logoutBtn"
         />
       </div>
-
-      <!-- <h5>Birthdate: {{ currentUserInfo.birthdate }}</h5> -->
-
-      <!-- <h1 id="eventsTitle">Events</h1> -->
       <div id="eventsTimeToggle">
         <h3 id="going" @click="futureEventsViewOn">Going</h3>
         <h3 id="past" @click="pastEventsViewOn">Past</h3>
@@ -153,6 +150,12 @@ export default {
 </script>
 
 <style scoped>
+#linkedIn {
+  font-weight: normal;
+  font-size: 14px;
+  word-wrap: break-word;
+  text-align: center;
+}
 #eventsTitle {
   margin-left: 20px;
   font-size: 30px;
@@ -169,9 +172,13 @@ export default {
   margin-top: 20px;
   place-self: center;
   display: grid;
+  width: 100%;
   place-items: center;
   margin-bottom: 30px;
   row-gap: 2px;
+}
+#userInfoCtr h4 {
+  margin-bottom: 5px;
 }
 #eventsTimeToggle {
   display: grid;
@@ -183,6 +190,7 @@ export default {
   font-size: 14px;
   font-style: italic;
 }
+/* for the going/past events headers */
 h3 {
   display: grid;
   place-items: center;
@@ -201,7 +209,7 @@ h1 {
   width: 50px;
 }
 #editIcon > img {
-  width: 25px;
+  width: 24px;
 }
 #xBtn {
   width: 20px;
