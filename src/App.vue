@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <section>
+    <div class="notifyMobile">
+      <h1>Destop/Tablet Mode Under Construction!</h1>
+      <img id="pylon" src="./assets/cone.png" alt="pylon" />
+    </div>
+    <section class="mobileView">
       <page-header
         v-if="
           loginToken &&
@@ -70,7 +74,24 @@ export default {
   padding: 0;
   margin: 0;
 }
-
+@media only screen and (max-width: 500px) {
+  .notifyMobile {
+    display: none;
+  }
+}
+@media only screen and (min-width: 500px) {
+  .notifyMobile {
+    display: grid;
+    margin-top: 30px;
+  }
+  .mobileView {
+    display: none;
+  }
+  #pylon {
+    width: 100px;
+    place-self: center;
+  }
+}
 #app {
   min-height: 100vh;
   width: 100%;
@@ -93,6 +114,7 @@ body {
   font-family: "Roboto Mono", monospace;
   background: #151a20;
 }
+
 /* all divs in app take up 100% */
 #app > section > div {
   height: 100%;
@@ -121,7 +143,8 @@ body {
   place-self: end;
 }
 .btn a,
-.btn p {
+.btn p,
+.btn span {
   color: #bc4959;
   font-weight: 400;
   padding-bottom: 2px;

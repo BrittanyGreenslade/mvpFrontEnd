@@ -36,11 +36,13 @@ export default {
       searchCity: undefined,
     };
   },
-
   computed: {
     eventsNearLocation() {
       return this.$store.state.eventsNearLocation;
     },
+  },
+  mounted() {
+    window.scrollTo(0, 0);
   },
   components: {
     AllEvents,

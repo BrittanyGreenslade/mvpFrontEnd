@@ -52,13 +52,13 @@
         />
       </div>
       <div class="btnContainer">
-        <button class="btn">
-          <router-link to="/home">cancel</router-link>
+        <button @click="cancelBtn" class="btn">
+          <span>cancel</span>
         </button>
         <button class="btn" @click="createEvent">
-          <p>
+          <span>
             create event
-          </p>
+          </span>
         </button>
       </div>
     </form>
@@ -91,6 +91,9 @@ export default {
     },
   },
   methods: {
+    cancelBtn() {
+      this.$router.push(`/home`);
+    },
     handleChildUpdate(data) {
       this.searchCity = data;
     },

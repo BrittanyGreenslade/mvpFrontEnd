@@ -11,6 +11,9 @@ export default {
   components: {
     CreateEventForm,
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
 };
 </script>
 

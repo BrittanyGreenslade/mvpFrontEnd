@@ -10,6 +10,9 @@ export default {
   components: {
     EventProfile,
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
 };
 </script>
 
