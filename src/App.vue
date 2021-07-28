@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="notifyMobile">
-      <h1>Destop/Tablet Mode Under Construction!</h1>
+      <h1>Desktop/Tablet Mode Under Construction!</h1>
       <img id="pylon" src="./assets/cone.png" alt="pylon" />
     </div>
     <div class="mobileView">

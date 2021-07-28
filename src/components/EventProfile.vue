@@ -192,8 +192,4 @@ h1 {
   height: 40%;
   margin-top: 30px;
 }
-/* .genGrid h1 {
-  border-bottom: 1px solid grey;
-  font-size: 40px;
-} */
 </style>
