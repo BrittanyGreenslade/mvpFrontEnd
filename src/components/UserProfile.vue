@@ -81,6 +81,8 @@ export default {
     userId(newValue, oldValue) {
       this.viewUserProfile(Number(newValue));
       newValue, oldValue;
+      //this is for if the route changes, since the dom doesn't re-render the data wasn't loading
+      this.$store.dispatch("getUsersEvents", Number(newValue));
     },
   },
   mounted() {
@@ -89,9 +91,9 @@ export default {
     this.checkUser();
     document.getElementById("going").style.color = "#FFFF00";
     //will change value of getters once this is dispatched
-    if (this.usersEvents === undefined) {
-      this.$store.dispatch("getUsersEvents", this.userId);
-    }
+    // if (this.usersEvents === undefined) {
+    this.$store.dispatch("getUsersEvents", this.userId);
+    // }
     if (this.allUsers === undefined) {
       this.viewUserProfile(Number(this.userId));
     } else {

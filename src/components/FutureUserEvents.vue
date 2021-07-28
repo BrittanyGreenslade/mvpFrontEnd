@@ -48,6 +48,13 @@ export default {
       return this.$store.state.usersEvents;
     },
   },
+
+  // watch: {
+  //   userId(newValue, oldValue) {
+  //     this.$store.dispatch("getUsersEvents", Number(newValue));
+  //     newValue, oldValue;
+  //   },
+  // },
   mounted() {
     if (this.usersEvents === undefined) {
       this.$store.dispatch("getUsersEvents", Number(this.userId));

@@ -111,10 +111,11 @@ export default new Vuex.Store({
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            userId: userId,
+            userId: Number(userId),
           },
         })
         .then((res) => {
+          console.log(Number(userId));
           context.commit("updateUsersEvents", res.data);
         })
         .catch((err) => {
