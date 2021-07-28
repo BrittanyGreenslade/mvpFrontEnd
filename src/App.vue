@@ -4,20 +4,22 @@
       <h1>Destop/Tablet Mode Under Construction!</h1>
       <img id="pylon" src="./assets/cone.png" alt="pylon" />
     </div>
-    <section class="mobileView">
-      <page-header
-        v-if="
-          loginToken &&
-            routePath !== `/profile/${userId}` &&
+    <div class="mobileView">
+      <section class="mobileView">
+        <page-header
+          v-if="
             loginToken &&
-            routePath !== `/login` &&
-            loginToken &&
-            routePath !== `/signup`
-        "
-      />
-      <router-view />
-      <page-footer id="footer" v-if="loginToken" />
-    </section>
+              routePath !== `/profile/${userId}` &&
+              loginToken &&
+              routePath !== `/login` &&
+              loginToken &&
+              routePath !== `/signup`
+          "
+        />
+      </section>
+      <router-view class="mobileView" />
+      <page-footer class="mobileView" id="footer" v-if="loginToken" />
+    </div>
   </div>
 </template>
 <script>
@@ -114,7 +116,9 @@ body {
   font-family: "Roboto Mono", monospace;
   background: #151a20;
 }
-
+#footer {
+  height: 10vh;
+}
 /* all divs in app take up 100% */
 #app > section > div {
   height: 100%;
@@ -123,7 +127,7 @@ body {
 }
 #app > section {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
 }
 .componentCtr {
   place-items: center;
@@ -201,9 +205,9 @@ textarea {
   color: #be9759;
 }
 #searchBar {
-  align-self: end;
+  /* align-self: end; */
   width: 80%;
-  place-self: center;
+  /* place-self: center; */
   border-radius: 10px;
   padding: 10px;
   padding-bottom: 20px;
@@ -236,8 +240,8 @@ textarea {
   display: grid;
   row-gap: 15px;
   margin-top: 15px;
-  min-height: 80%;
-  overflow: scroll;
+  min-height: 100%;
+  /* overflow: scroll; */
 }
 .eventContainer {
   display: grid;

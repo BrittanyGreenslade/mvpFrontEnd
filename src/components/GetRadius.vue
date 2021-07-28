@@ -4,18 +4,20 @@
     <div>
       <p id="distanceKm">
         Events within
-        <input
-          type="text"
-          placeholder="distance (km)"
-          list="radiusList"
-          id="radiusInput"
-          class="landingInput"
-        />
-        <datalist autocomplete="off" id="radiusList">
-          <option value="25"> </option>
-          <option value="50"> </option>
-          <option value="100"> </option>
-        </datalist>
+      </p>
+      <input
+        type="text"
+        placeholder="distance (km)"
+        list="radiusList"
+        id="radiusInput"
+        class="landingInput"
+      />
+      <datalist autocomplete="off" id="radiusList">
+        <option value="25"> </option>
+        <option value="50"> </option>
+        <option value="100"> </option>
+      </datalist>
+      <p>
         km of <b>{{ searchCity.cityName }}, {{ searchCity.countryName }}</b>
       </p>
     </div>
@@ -63,6 +65,7 @@ export default {
     notifyParent() {
       this.$emit("toggleSearchCity");
     },
+
     //chooses cities within distance chosen in input dropdown (25, 50, 100)
     withinDistance(locationId) {
       this.counter = 0;
@@ -79,6 +82,7 @@ export default {
         })
         .then((res) => {
           for (let i = 0; i < res.data.length; i++) {
+            //pass the id and how many cities are within that distance for fn below
             this.getEventsAtLocation(res.data[i].cityId, res.data.length);
           }
           document.getElementById("radius").style.display = "none";
@@ -87,7 +91,8 @@ export default {
           console.log(err);
         });
     },
-
+    //watches for when the api call is done (when num cities is equal to the counter)
+    //and THEN updates the store
     getEventsAtLocation(cityId, numCities) {
       axios
         .request({
@@ -109,7 +114,7 @@ export default {
         })
         .catch((err) => {
           this.counter += 1;
-          //if last api call fails, store won't be updated
+          //if last api call fails, store won't be updated without this
           if (this.counter === numCities) {
             this.$store.commit("updateEventsNearLocation", this.events);
           }

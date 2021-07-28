@@ -111,16 +111,18 @@ a {
   justify-self: center;
   width: 90%;
 }
+.attendeesContainer:last-child {
+  border-bottom: none;
+}
 #listContainer {
   display: grid;
-  grid-auto-rows: 80px 100px auto;
+  grid-auto-rows: 80px 120px auto;
   top: 100px;
   height: 80%;
   width: 80%;
   border-radius: 15px;
   overflow: scroll;
   position: absolute;
-  background: white;
   background: #0d1116;
   border: 2px solid grey;
 }

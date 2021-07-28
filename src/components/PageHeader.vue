@@ -34,6 +34,7 @@ export default {
 
 <style scoped>
 #headerCtr {
+  display: grid;
   grid-template-columns: 4fr 1fr;
   place-items: center;
   margin-top: 10px;

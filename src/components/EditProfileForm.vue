@@ -127,6 +127,7 @@ export default {
   justify-self: center;
   margin-top: 20px;
   align-self: start;
+  margin-bottom: 30px;
 }
 #pageCtr div:nth-child(1),
 #deleteComp {

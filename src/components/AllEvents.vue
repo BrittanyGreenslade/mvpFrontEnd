@@ -59,12 +59,16 @@ export default {
 .genGrid p:nth-child(1) {
   font-size: 14px;
 }
+.btn {
+  width: 90px;
+}
 .cmptHeader {
   display: grid;
   grid-template-columns: 2fr 1fr;
   place-items: center;
   width: 90%;
   margin-left: 20px;
+  margin-top: 10px;
 }
 .cmptHeader > h1 {
   place-self: start;

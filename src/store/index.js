@@ -58,9 +58,9 @@ export default new Vuex.Store({
     deleteUserEvent(state, data) {
       state.usersEvents.splice(data, 1);
     },
-    eventsNearLocationTog(state, data) {
-      state.eventsNearLocation = data;
-    },
+    // eventsNearLocationTog(state, data) {
+    //   state.eventsNearLocation = data;
+    // },
     updateEventsNearLocation(state, data) {
       state.eventsNearLocation = data;
     },

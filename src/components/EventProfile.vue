@@ -145,7 +145,6 @@ export default {
 h1 {
   font-weight: 900;
   color: #be9759;
-  /* text-shadow: 2px 2px #be9759; */
 }
 .eventImg {
   width: 110px;
@@ -170,7 +169,7 @@ h1 {
   margin-top: 20px;
 }
 #eventCtr {
-  display: grid;
+  /* display: grid; */
   height: 75%;
   margin-bottom: 30px;
   display: grid;
@@ -193,8 +192,8 @@ h1 {
   height: 40%;
   margin-top: 30px;
 }
-.genGrid h1 {
+/* .genGrid h1 {
   border-bottom: 1px solid grey;
   font-size: 40px;
-}
+} */
 </style>

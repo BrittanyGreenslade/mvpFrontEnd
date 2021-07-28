@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="usersEventsCtr">
     <div class="eventContainerParent">
       <h3 class="notifyNoEvents" v-if="usersFutureEvents.length === 0">
         This user is not registed for any future events
@@ -56,4 +56,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#usersEventsCtr {
+  min-height: 60vh;
+}
+.eventContainerParent {
+  min-height: 20%;
+}
+</style>

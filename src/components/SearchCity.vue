@@ -46,6 +46,9 @@ export default {
     notifyParent() {
       this.$emit("getLocationInfo", this.searchCity);
     },
+    toggleParentView() {
+      this.$emit("togglePageView", false);
+    },
     selectCity(city) {
       this.searchCity = city;
       document.getElementById("cityList").style.display = "none";
@@ -62,6 +65,7 @@ export default {
       if (document.getElementById("cityName").value.length < 1) {
         document.getElementById("cityList").style.display = "none";
       }
+      this.toggleParentView();
       //checks len of the city input to make api call when length is 3 characters or more
       if (document.getElementById("cityName").value.length >= 3) {
         this.getCities();

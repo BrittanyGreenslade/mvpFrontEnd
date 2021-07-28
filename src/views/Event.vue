@@ -19,5 +19,6 @@ export default {
 <style scoped>
 #componentCtr {
   height: auto;
+  display: grid;
 }
 </style>

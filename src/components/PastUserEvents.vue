@@ -1,5 +1,5 @@
 <template>
-  <div class="genGrid">
+  <div id="usersEventsCtr">
     <div class="eventContainerParent">
       <h3 class="notifyNoEvents" v-if="usersPastEvents.length === 0">
         This user has not attended any events
@@ -54,4 +54,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#usersEventsCtr {
+  min-height: 60vh;
+}
+.eventContainerParent {
+  min-height: 20%;
+}
+</style>

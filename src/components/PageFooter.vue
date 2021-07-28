@@ -12,7 +12,8 @@ export default {
 
 <style scoped>
 #footer {
-  height: 10vh;
+  display: grid;
+  /* height: 10vh; */
   place-items: center;
   width: 100%;
   border-top: 1px solid grey;

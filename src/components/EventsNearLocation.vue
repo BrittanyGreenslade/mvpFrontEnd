@@ -4,6 +4,7 @@
       No events listed near this location
     </h3>
     <div>
+      <p class="backBtn" @click="notifyParent">Home</p>
       <div class="eventContainerParent">
         <div
           class="eventContainer"
@@ -50,6 +51,11 @@ export default {
       return this.$store.state.eventsNearLocation;
     },
   },
+  methods: {
+    notifyParent() {
+      this.$emit("togglePgView", true);
+    },
+  },
 };
 </script>
 
@@ -64,5 +70,8 @@ export default {
 }
 #thisPgCtr {
   display: grid;
+}
+.backBtn {
+  margin: 30px 0 5px 30px;
 }
 </style>

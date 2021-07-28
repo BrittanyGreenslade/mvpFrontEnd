@@ -7,6 +7,7 @@
     />
     <search-city
       v-if="eventsNearLocation === undefined"
+      @togglePageView="handleToggleUpdate"
       @getLocationInfo="handleChildUpdate"
       id="searchBar"
     />
@@ -16,10 +17,12 @@
       v-if="searchCity !== undefined"
       :searchCity="searchCity"
     />
-    <all-events v-if="eventsNearLocation === undefined" />
+    <all-events v-if="allEventsView === true" />
     <div v-else>
-      <p class="backBtn" @click="eventsNearLocationToggle">Home</p>
-      <events-near-location :eventCity="searchCity" />
+      <events-near-location
+        @togglePgView="handleTogglePgView"
+        :eventCity="searchCity"
+      />
     </div>
   </div>
 </template>
@@ -34,6 +37,7 @@ export default {
   data() {
     return {
       searchCity: undefined,
+      allEventsView: true,
     };
   },
   computed: {
@@ -54,17 +58,26 @@ export default {
     handleRadiusUpdate() {
       this.searchCity = undefined;
       //toggles view of list
-      this.$store.commit("eventsNearLocationTog", undefined);
+      // this.$store.commit("eventsNearLocationTog", undefined);
       document.getElementById("cityName").value = "";
     },
     //changes view of the page to have all cities or cities searched
     eventsNearLocationToggle() {
-      this.$store.commit("eventsNearLocationTog", undefined);
-      this.searchCity = undefined;
+      // this.$store.commit("eventsNearLocationTog", undefined);
+      this.allEventsView = true;
     },
     //gets the search city from the search bar component
     handleChildUpdate(data) {
       this.searchCity = data;
+    },
+    //changes view of page when cities are searched
+    handleToggleUpdate(data) {
+      this.allEventsView = data;
+    },
+    //changes view back when events at location closed
+    handleTogglePgView(data) {
+      this.allEventsView = data;
+      this.$store.commit("updateEventsNearLocation", undefined);
     },
   },
 };
@@ -72,12 +85,12 @@ export default {
 
 <style scoped>
 .pgCtr {
-  overflow: scroll;
   grid-template-rows: 300px 120px minmax(50%, 100%);
   margin-bottom: 20px;
+  min-height: 80vh;
 }
-.backBtn {
-  margin: 30px 0 5px 30px;
+#searchBar {
+  margin-left: 8%;
 }
 #heroPic {
   width: 100%;
@@ -88,10 +101,9 @@ export default {
   border: 1px solid #be9759;
   width: 78%;
   justify-self: center;
-  /* left: 9%; */
-  position: relative;
+  /* position: relative; */
   background: #0d1116;
-  top: -22px;
+  /* top: -22px; */
   height: 100px;
   display: grid;
   padding: 10px;
