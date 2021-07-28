@@ -2,7 +2,7 @@
   <div>
     <button
       class="btn"
-      v-if="this.currentUserInfo.userId === this.hostId"
+      v-if="currentUserInfo.userId === hostId"
       @click="deleteEvent"
     >
       <p>

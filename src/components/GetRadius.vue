@@ -76,7 +76,6 @@ export default {
           params: {
             cityLocationId: locationId,
             radius: document.getElementById("radiusInput").value,
-            userId: this.currentUserInfo.userId,
           },
         })
         .then((res) => {

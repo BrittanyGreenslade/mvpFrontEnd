@@ -115,12 +115,12 @@ export default {
         .then((res) => {
           for (let i = 0; i < res.data.length; i++) {
             this.event = res.data[i];
+            //from index 0 to index 0, not inclusive of last num
             this.eventDate = res.data[i].dateTime.substring(0, 10);
             this.eventTime = res.data[i].dateTime.substring(10);
           }
         })
         .catch((err) => {
-          console.log(this.eventId);
           console.log(err);
         });
     },

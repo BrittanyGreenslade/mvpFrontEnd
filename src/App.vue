@@ -9,7 +9,7 @@
         <page-header
           v-if="
             loginToken &&
-              routePath !== `/profile/${userId}` &&
+              routePath !== `/profile/${Number(userId)}` &&
               loginToken &&
               routePath !== `/login` &&
               loginToken &&

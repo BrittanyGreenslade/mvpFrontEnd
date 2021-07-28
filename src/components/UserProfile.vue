@@ -9,7 +9,7 @@
             alt="close user profile"
         /></router-link>
         <router-link
-          v-if="Number(userId) === this.currentUserInfo.userId"
+          v-if="Number(userId) === currentUserInfo.userId"
           id="editIcon"
           to="/editProfile"
           ><img

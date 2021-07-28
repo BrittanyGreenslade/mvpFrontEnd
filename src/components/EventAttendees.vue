@@ -59,7 +59,7 @@ export default {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            eventId: this.eventId,
+            eventId: Number(this.eventId),
           },
         })
         .then((res) => {
@@ -67,7 +67,6 @@ export default {
           this.$emit("getNumAttending", res.data.length);
         })
         .catch((err) => {
-          console.log(this.eventId);
           console.log(err);
         });
     },
