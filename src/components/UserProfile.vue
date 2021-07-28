@@ -145,7 +145,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(userId);
           for (let i = 0; i < res.data.length; i++) {
             this.userInfo = res.data[i];
           }

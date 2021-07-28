@@ -133,7 +133,7 @@ export default {
           this.$router.push({ path: `/home` });
         })
         .catch((err) => {
-          console.log(this.params);
+          //date must be in future, length of things, etc.
           console.log(err);
         });
     },

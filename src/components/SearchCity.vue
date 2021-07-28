@@ -9,7 +9,6 @@
       id="cityName"
       @keyup="checkLength"
     />
-
     <div id="cityList">
       <div
         @click="selectCity(city)"

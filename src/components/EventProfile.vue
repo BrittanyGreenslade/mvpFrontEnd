@@ -109,7 +109,7 @@ export default {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
-            eventId: eventId,
+            eventId: Number(eventId),
           },
         })
         .then((res) => {
