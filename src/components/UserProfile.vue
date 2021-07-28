@@ -31,7 +31,7 @@
           userInfo.linkedInUrl
         }}</a>
         <logout-btn
-          v-if="Number(userId) === this.currentUserInfo.userId"
+          v-if="Number(userId) === currentUserInfo.userId"
           id="logoutBtn"
         />
       </div>
@@ -48,7 +48,7 @@
 <script>
 import axios from "axios";
 import LogoutBtn from "./LogoutBtn.vue";
-import FutureUserEvents from "./FutureUserEvents.vue";
+import FutureUserEvents from "../components/FutureUserEvents.vue";
 import PastUserEvents from "../components/PastUserEvents.vue";
 export default {
   name: "user-profile",
@@ -108,7 +108,7 @@ export default {
           //anything after this won't happen if event is found
         }
       }
-      this.viewUserProfile(this.userId);
+      this.viewUserProfile(Number(this.userId));
     },
     futureEventsViewOn() {
       if (this.pastEventsView === true) {
