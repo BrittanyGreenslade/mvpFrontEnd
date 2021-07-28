@@ -15,7 +15,6 @@
             <router-link :to="`/event/${event.eventId}`">
               <h3 class="eventName">{{ event.eventName }}</h3></router-link
             >
-            <!-- <h3 class="eventName">{{ event.eventName }}</h3> -->
             <p>
               Host:
               <router-link class="hostLink" :to="`/profile/${event.hostId}`">{{

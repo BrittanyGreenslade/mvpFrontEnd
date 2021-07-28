@@ -21,9 +21,13 @@
 
             <p>
               Host:
-              <router-link class="hostLink" :to="`/profile/${event.hostId}`">{{
-                event.hostName
-              }}</router-link>
+              <!-- not sure why but clicking this router link for other users in this component
+              results in a get error in the console but everthing seems to be functioning -->
+              <router-link class="hostLink" :to="`/profile/${event.hostId}`"
+                ><p>{{ event.hostName }}</p>
+
+                <p></p
+              ></router-link>
             </p>
             <p class="locationName">
               {{ event.cityName }}, {{ event.countryName }}
