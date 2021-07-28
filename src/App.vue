@@ -238,16 +238,14 @@ textarea {
 /* event styling */
 .eventContainerParent {
   display: grid;
-  row-gap: 15px;
+  row-gap: 10px;
   margin-top: 15px;
   min-height: 100%;
-  /* overflow: scroll; */
 }
 .eventContainer {
   display: grid;
   width: 90%;
   border-bottom: 1px solid #9e49cf;
-  /* border-radius: 15px; */
   place-self: center;
 }
 

@@ -115,7 +115,6 @@ export default new Vuex.Store({
           },
         })
         .then((res) => {
-          console.log(Number(userId));
           context.commit("updateUsersEvents", res.data);
         })
         .catch((err) => {

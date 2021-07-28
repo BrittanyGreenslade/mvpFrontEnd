@@ -4,20 +4,19 @@
     <div>
       <p id="distanceKm">
         Events within
-      </p>
-      <input
-        type="text"
-        placeholder="distance (km)"
-        list="radiusList"
-        id="radiusInput"
-        class="landingInput"
-      />
-      <datalist autocomplete="off" id="radiusList">
-        <option value="25"> </option>
-        <option value="50"> </option>
-        <option value="100"> </option>
-      </datalist>
-      <p>
+        <input
+          type="text"
+          placeholder="distance (km)"
+          list="radiusList"
+          id="radiusInput"
+          class="landingInput"
+        />
+        <datalist autocomplete="off" id="radiusList">
+          <option value="25"> </option>
+          <option value="50"> </option>
+          <option value="100"> </option>
+        </datalist>
+
         km of <b>{{ searchCity.cityName }}, {{ searchCity.countryName }}</b>
       </p>
     </div>

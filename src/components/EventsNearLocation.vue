@@ -3,8 +3,8 @@
     <h3 class="notifyNoEvents" v-if="eventsNearLocation.length === 0">
       No events listed near this location
     </h3>
-    <div>
-      <p class="backBtn" @click="notifyParent">Home</p>
+    <p class="backBtn" @click="notifyParent">Home</p>
+    <div id="nearEventsCtr">
       <div class="eventContainerParent">
         <div
           class="eventContainer"
@@ -60,6 +60,12 @@ export default {
 </script>
 
 <style scoped>
+#nearEventsCtr {
+  margin-bottom: 20px;
+}
+.eventContainerParent {
+  row-gap: none;
+}
 .genGrid p:nth-child(1) {
   font-size: 14px;
 }
@@ -70,6 +76,7 @@ export default {
 }
 #thisPgCtr {
   display: grid;
+  min-height: 60%;
 }
 .backBtn {
   margin: 30px 0 5px 30px;

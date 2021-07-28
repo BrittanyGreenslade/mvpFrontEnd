@@ -144,6 +144,7 @@ export default {
 <style scoped>
 .componentCtr {
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 #description {
   height: 70px;

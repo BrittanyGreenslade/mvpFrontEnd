@@ -11,7 +11,7 @@
       >
         <div class="eventContainerChild">
           <div class="genGrid">
-            <p class="bold">{{ event.dateTime }} (UTC)</p>
+            <p>{{ event.dateTime }} (UTC)</p>
             <router-link :to="`/event/${event.eventId}`">
               <h3 class="eventName">{{ event.eventName }}</h3></router-link
             >
@@ -60,5 +60,8 @@ export default {
 }
 .eventContainerParent {
   min-height: 20%;
+}
+.eventContainer {
+  width: 100%;
 }
 </style>

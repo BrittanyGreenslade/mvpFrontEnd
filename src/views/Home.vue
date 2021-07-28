@@ -18,7 +18,7 @@
       :searchCity="searchCity"
     />
     <all-events v-if="allEventsView === true" />
-    <div v-else>
+    <div v-if="eventsNearLocation !== undefined">
       <events-near-location
         @togglePgView="handleTogglePgView"
         :eventCity="searchCity"
@@ -45,6 +45,11 @@ export default {
       return this.$store.state.eventsNearLocation;
     },
   },
+  watch: {
+    eventsNearLocation(newValue, oldValue) {
+      newValue, oldValue;
+    },
+  },
   mounted() {
     window.scrollTo(0, 0);
   },
@@ -57,13 +62,10 @@ export default {
   methods: {
     handleRadiusUpdate() {
       this.searchCity = undefined;
-      //toggles view of list
-      // this.$store.commit("eventsNearLocationTog", undefined);
       document.getElementById("cityName").value = "";
     },
     //changes view of the page to have all cities or cities searched
     eventsNearLocationToggle() {
-      // this.$store.commit("eventsNearLocationTog", undefined);
       this.allEventsView = true;
     },
     //gets the search city from the search bar component
@@ -78,6 +80,7 @@ export default {
     handleTogglePgView(data) {
       this.allEventsView = data;
       this.$store.commit("updateEventsNearLocation", undefined);
+      this.searchCity = undefined;
     },
   },
 };
@@ -101,11 +104,10 @@ export default {
   border: 1px solid #be9759;
   width: 78%;
   justify-self: center;
-  /* position: relative; */
   background: #0d1116;
-  /* top: -22px; */
   height: 100px;
   display: grid;
+  margin-left: 9%;
   padding: 10px;
 }
 </style>
