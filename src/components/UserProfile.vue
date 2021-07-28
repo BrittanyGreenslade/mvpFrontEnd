@@ -77,6 +77,12 @@ export default {
       return this.$store.state.usersEvents;
     },
   },
+  watch: {
+    userId(newValue, oldValue) {
+      this.viewUserProfile(Number(newValue));
+      newValue, oldValue;
+    },
+  },
   mounted() {
     //need this for when currentUser updates their profile and it doesn't do a
     //call to get user info.
