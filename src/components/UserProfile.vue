@@ -108,7 +108,7 @@ export default {
           //anything after this won't happen if event is found
         }
       }
-      this.viewUserProfile(this.eventId);
+      this.viewUserProfile(this.userId);
     },
     futureEventsViewOn() {
       if (this.pastEventsView === true) {
@@ -124,7 +124,7 @@ export default {
       document.getElementById("going").style.color = "#05b0c7";
       document.getElementById("past").style.color = "#FFFF00";
     },
-    viewUserProfile() {
+    viewUserProfile(userId) {
       axios
         .request({
           url: `${process.env.VUE_APP_API_URL}/users`,
@@ -132,7 +132,7 @@ export default {
             "Content-Type": "application/json",
           },
           params: {
-            userId: this.userId,
+            userId: userId,
           },
         })
         .then((res) => {
