@@ -92,7 +92,7 @@ export default {
     document.getElementById("going").style.color = "#FFFF00";
     //will change value of getters once this is dispatched
     // if (this.usersEvents === undefined) {
-    this.$store.dispatch("getUsersEvents", this.userId);
+    this.$store.dispatch("getUsersEvents", Number(this.userId));
     // }
     if (this.allUsers === undefined) {
       this.viewUserProfile(Number(this.userId));
