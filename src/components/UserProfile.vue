@@ -136,14 +136,16 @@ export default {
       axios
         .request({
           url: `${process.env.VUE_APP_API_URL}/users`,
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
           params: {
-            userId: userId,
+            userId: Number(userId),
           },
         })
         .then((res) => {
+          console.log(userId);
           for (let i = 0; i < res.data.length; i++) {
             this.userInfo = res.data[i];
           }

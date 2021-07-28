@@ -64,6 +64,6 @@ export default {
   min-height: 20%;
 }
 .eventContainer {
-  width: 100%;
+  width: 90%;
 }
 </style>
