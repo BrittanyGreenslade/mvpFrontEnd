@@ -105,7 +105,8 @@ export default {
     getOneEvent(eventId) {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/events`,
+          url: `api/events`,
+          // url: `${process.env.VUE_APP_API_URL}/events`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {

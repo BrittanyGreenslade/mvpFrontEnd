@@ -29,7 +29,8 @@ export default {
     logout() {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/login`,
+          url: `api/login`,
+          // url: `${process.env.VUE_APP_API_URL}/login`,
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

@@ -65,7 +65,8 @@ export default {
     attendEvent() {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/users-events`,
+          url: `api/users-events`,
+// url: `${process.env.VUE_APP_API_URL}/users-events`,
           method: "POST",
           headers: { "Content-Type": "application/json" },
           data: {

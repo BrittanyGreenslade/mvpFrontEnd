@@ -55,7 +55,8 @@ export default {
     getAttendees() {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/events-users`,
+          url: `api/events-users`,
+          // url: `${process.env.VUE_APP_API_URL}/events-users`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {

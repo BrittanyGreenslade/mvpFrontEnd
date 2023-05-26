@@ -68,7 +68,8 @@ export default {
     editEvent() {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/events`,
+          url: `api/events`,
+          // url: `${process.env.VUE_APP_API_URL}/events`,
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           data: {

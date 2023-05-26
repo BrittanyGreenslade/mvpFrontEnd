@@ -76,7 +76,8 @@ export default {
     getCities() {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/location`,
+          url: `api/location`,
+          // url: `${process.env.VUE_APP_API_URL}/location`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {

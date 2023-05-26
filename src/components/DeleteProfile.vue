@@ -48,7 +48,8 @@ export default {
     deleteUser() {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/users`,
+          url: `api/users`,
+          // url: `${process.env.VUE_APP_API_URL}/users`,
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           data: {

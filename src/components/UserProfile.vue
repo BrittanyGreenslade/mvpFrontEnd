@@ -135,7 +135,8 @@ export default {
     viewUserProfile(userId) {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/users`,
+          url: `api/users`,
+          // url: `${process.env.VUE_APP_API_URL}/users`,
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -70,7 +70,8 @@ export default {
       this.counter = 0;
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/distance`,
+          url: `api/distance`,
+          // url: `${process.env.VUE_APP_API_URL}/distance`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {
@@ -94,7 +95,8 @@ export default {
     getEventsAtLocation(cityId, numCities) {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/events/location`,
+          url: `api/events/location`,
+          // url: `${process.env.VUE_APP_API_URL}/events/location`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {

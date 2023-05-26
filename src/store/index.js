@@ -78,7 +78,8 @@ export default new Vuex.Store({
     getUsers(context) {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/users`,
+          url: `api/users`,
+          // url: `${process.env.VUE_APP_API_URL}/users`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
         })
@@ -92,7 +93,8 @@ export default new Vuex.Store({
     getAllEvents(context) {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/events`,
+          url: `api/events`,
+          // url: `${process.env.VUE_APP_API_URL}/events`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
         })
@@ -107,7 +109,8 @@ export default new Vuex.Store({
     getUsersEvents(context, userId) {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/users-events`,
+          url: `api/users-events`,
+          // url: `${process.env.VUE_APP_API_URL}/users-events`,
           method: "GET",
           headers: { "Content-Type": "application/json" },
           params: {

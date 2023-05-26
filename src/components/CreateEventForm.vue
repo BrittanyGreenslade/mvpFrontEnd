@@ -123,7 +123,8 @@ export default {
       this.createParams();
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/events`,
+          url: `api/events`,
+          // url: `${process.env.VUE_APP_API_URL}/events`,
           method: "POST",
           headers: { "Content-Type": "application/json" },
           data: this.params,
